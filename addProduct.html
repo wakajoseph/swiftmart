@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#113364">
+  <link rel="stylesheet" href="userFeeds.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <title>SwiftMart | Product Manager</title>
+  <style>
+    :root {
+      --primary: #113364;
+      --secondary: #ff5e00;
+      --accent: #a26b0e;
+      --danger: #e74c3c;
+      --success: #2ecc71;
+      --light: #f8f9fa;
+      --dark: #2c3e50;
+      --gray: #95a5a6;
+      --border: #dfe6e9;
+      --text: #333333;
+      --text-light: #7f8c8d;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-y: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      height: 100vh;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+    
+    .productVariants {
+     width: 100%;
+    }
+    
+    
+    /* logo Styles */
+    .logoCard {
+      background: radial-gradient(circle at center, white,transparent,transparent);  
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+      width: 100%;
+      
+      
+      
+      border-radius: 0 0 2px 2px;
+      
+    }
+   
+    
+    
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 12px;
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #007bff;
+    }
+
+    .logo-subtext {
+      font-size: 12px;
+      font-weight: 400;
+      color: #555;
+      margin-top: 2px;
+    }
+    
+    /* Card Styles */
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 25px;
+      margin-bottom: 25px;
+      width: 100%;
+      transition: var(--transition);
+    }
+    
+     
+    
+    .card:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .section {
+      color: var(--primary);
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 15px 0 10px;
+      padding-left: 5px;
+      border-left: 4px solid var(--secondary);
+    }
+    
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    input[type="text"],
+    input[type="number"],
+    input[type="url"],
+    input[type="file"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 16px;
+      transition: var(--transition);
+      background-color: var(--light);
+    }
+    
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(17, 51, 100, 0.1);
+    }
+    
+    .text-muted {
+        color: #1d335799;
+    }
+    
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    
+    /* Button Styles */
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #0c2a52;
+      transform: translateY(-2px);
+    }
+    
+    
+    
+    .btn-primary-outlined {
+       border: 1px solid var(--primary);
+       color: var(--primary); 
+       background: white;
+       margin: 5px 0;
+    }
+    
+    .btn-primary-outlined:hover {
+       border: 3px solid var(--primary);
+    }
+    
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      background-color: #e05500;
+      transform: translateY(-2px);
+    }
+    
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+    
+    .btn-danger-outlined {
+        border: 1px solid red;
+        color: red;
+        background: white;
+    }
+    
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--light);
+    }
+    
+    /* Property & Variant Sections */
+    .property-row, .variant-row {
+      background: var(--light);
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+    
+    .property-controls, .variant-controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .values-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 15px 0;
+    }
+    
+    .value-input {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .property-type {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-left: 10px;
+      font-style: italic;
+    }
+    
+    .sku-preview {
+      font-family: monospace;
+      background: #e8f4fd;
+      padding: 8px 12px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-weight: 500;
+    }
+    
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    th, td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    th {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 500;
+    }
+    
+    tr:nth-child(even) {
+      background-color: var(--light);
+    }
+    
+    tr:hover {
+      background-color: #e8f4fd;
+    }
+    
+    .variant-image-preview {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    
+    /* Image Upload Styles */
+    .profile,
+    .variant-image-container {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border: 2px dashed var(--gray);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      background: var(--light);
+      overflow: hidden;
+      margin-bottom: 15px;
+      z-index: 1;
+    }
+    
+    .add {
+      font-size: 1.5rem;
+      position: absolute;
+      pointer-events: none;
+      z-index: 10;
+    }
+    
+    .profile input[type="file"],
+    .variant-image-container input[type="file"],
+    #addImage input[type="file"] {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 100;
+    }
+    
+    .profile img {
+      width: 100%;
+      height: 100%;  
+      object-fit: cover;
+      background-size: cover;
+    }
+        
+    
+    .previewField  {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 500;
+            
+    }
+    
+  .imageOverlay {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      display: none;
+      background: white;
+      z-index: 100000;   
+      align-items: center; 
+          
+ 
+    }
+
+ .imageOverlay img {
+     width: 100%;
+     height: auto;
+ }
+
+ .imageOverlay .prvheader {
+   position: fixed;
+   top: 0;
+   width: 100%; 
+   background: rgba(0,0,0,0.6);
+   color:white;
+   display: flex;      
+   padding: 10px 20px;
+   
+}
+
+
+.prvheader .fas {
+    font-size: 1.6em;
+    width: 10%;
+    
+}
+
+.imgTitle {
+    max-width: 80%;
+    word-wrap: break-word; 
+}
+    
+    
+    
+    .remove {
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    
+    
+    
+
+    
+    /* Tags Styles */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .tag {
+      background: var(--light);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .tag-remove {
+      cursor: pointer;
+      color: var(--danger);
+    }
+    
+    /* Submit Button */
+    .submit-btn {      
+      border-radius: 8px;
+      width: 100%;
+      max-width: 300px;
+      margin: 30px auto;
+      padding: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 6px rgba(255, 94, 0, 0.2);
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(255, 94, 0, 0.3);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .property-controls, .variant-controls {
+        flex-direction: column;
+      }
+      
+      .values-container {
+        flex-direction: column;
+      }
+      
+      .value-input {
+        width: 100%;
+      }
+      
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      
+      
+      .profile, .addImage {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      
+      input, select, textarea, button {
+        padding: 10px 12px;
+      }
+      
+      
+    }
+    
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+    
+    .mt-20 {
+      margin-top: 20px;
+    }
+    
+    .mb-20 {
+      margin-bottom: 20px;
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+    
+    @keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+
+.morePicsContainer {
+    
+    width: 100%;    
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.variant-image-preview {
+    width: 100%;
+    height: 100%; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    
+}
+
+
+
+#imagesPreview {
+    max-width: 100%;
+    display: flex;
+    gap: 5px;
+    position: relative;   
+    flex-wrap: wrap;    
+    transition: all 0.3s ease;
+}
+
+    .previewSpace  {       
+      width: 80px;          
+      height: 80px;
+      border-radius: 5px;
+      position: relative; 
+      overflow: hidden;     
+    }
+    
+    .previewSpace img,
+    .variant-image {
+        width: 100%;
+        height: 100%;
+        
+    }
+    
+    img,
+    .profilePreview {
+        z-index: 500;
+    }
+    
+   
+    
+
+  #addImage {
+    width: 100px;
+    height: 100px;    
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    border-radius: 5px;
+    color: var(--gray);
+    font-size: 1.5rem;
+    border: 2px dashed var(--gray);
+  }
+  
+  
+  #product-attributes-head, 
+  #product-tags,
+  #product-attributes,
+  #product-tags-head {
+      width: 100%;      
+      display: grid;
+      grid-template-columns: 0.4fr 1.3fr 1.3fr;
+      gap: 1px;        
+      
+      background: var(--border);
+      border: 1px solid var(--border);
+      
+      
+  }
+  
+  #product-attributes-head,
+  #product-tags-head {
+      border-bottom: none;
+  }
+  
+  
+  #product-tags input,
+  #product-attributes input {
+    border:none; 
+   }
+  
+  .attr.required, 
+  .attr-value.required,
+  .tagValue.required {
+      border: 1px solid red;
+      box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  animation: pulse 1s infinite;      
+      
+  }
+
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+      }
+      50% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 1);
+      }
+      100% {
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+      }
+    }
+
+    
+
+  
+  #product-attributes-head,
+  #product-tags-head {
+      overflow: hidden;
+      border-radius: 5px 5px 0 0;
+      
+      
+  }
+  
+  #product-attributes,
+  #product-tags {
+      overflow: hidden;
+      border-radius: 0 0 5px 5px;      
+      
+  }
+  
+  #product-tags,
+  #product-tags-head {
+      
+      grid-template-columns: 0.3fr 1.7fr;
+      
+      
+  }
+  
+  #product-attributes-head div,
+  #product-attributes input,
+  #product-attributes div,
+  #product-tags input,
+  #product-tags div,
+  #product-tags-head div {
+      background: white;
+      padding: 5px;
+      border-radius: 0;      
+      color: var(--primary);
+  }
+  
+  #nextAttribute,
+  #nextTag {
+      margin-top: 10px;      
+     
+  }
+  
+  
+    
+
+
+ 
+  </style>
+</head>
+<body>
+    
+    <div class="timedAlert"></div>
+    <div class="timedToast"></div>
+    
+    <div class="loading">
+        <div style="display:flex; flex-direction: column; align-items: center">
+        <div id="rotatingCircle"></div>
+        <div id="loadFeedback">loading...</div>
+        </div>
+    </div> 
+    
+    <div id="dialogContainer" style="display: none;">   
+        <div class="customConfirm" id="alertDialog">
+            <div class="c-head">Alert</div>
+            <div id="alertMessage" class="confirm-message"></div>
+            <button id="alertOkBtn">OK</button>
+        </div>
+             
+        <div class="customAlert" id="confirmDialog">
+            <div class="c-head">Confirm</div>
+            <div id="confirmMessage" class="confirm-message"></div>
+            <div id="confirm-buttons">
+                <button id="cancelBtn">Cancel</button>
+                <button id="confirmBtn">Proceed</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="imageOverlay">
+      <div class="prvheader">
+          <i class="fas fa-angle-left"></i>
+          <div class="imgTitle"></div>          
+      </div>
+      <div id="photoContainer"></div>
+  </div>
+  
+  
+  
+  <div id="sectionName" style="position:sticky; top:0; background:white; padding:5px; z-index:10;">Section Name</div>
+    
+ 
+  <div class="container">
+  
+  <div class="logoCard">
+        
+        <!----------------- -->            
+    <!--  LOGO SECTION  -->
+    <!-- -------------- -->
+    <div class="logo">
+    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Shopping Cart with Lightning -->
+      <path d="M7 18C6.44772 18 6 18.4477 6 19C6 19.5523 6.44772 20 7 20C7.55229 20 8 19.5523 8 19C8 18.4477 7.55229 18 7 18Z" fill="#007bff"/>
+      <path d="M17 18C16.4477 18 16 18.4477 16 19C16 19.5523 16.4477 20 17 20C17.5523 20 18 19.5523 18 19C18 18.4477 17.5523 18 17 18Z" fill="#007bff"/>
+      <path d="M5 4H6.5L7.7 8H19.5L18 13H8L7 9H4V7H6L5 4Z" stroke="#007bff" stroke-width="1.8"/>
+      <path d="M14 3L10 10H13L11 16L17 8H14L16 3H14Z" fill="#FFB100"/>
+    </svg>
+    
+    <div>
+      <div class="logo-text">SwiftMart</div>
+      <div class="logo-subtext">Shop Swift. Live Smart.</div>
+    </div>
+   </div>
+  </div>
+                  
+    <!-- Product Information -->
+    <div class="section" data-id="A">A. Product Information</div>
+    
+    <div class="card">
+      <div class="form-group">
+        <label for="product-name">Product Name</label>
+        <input type="text" id="product-name" placeholder="e.g. Smartphone X Pro">
+      </div>
+      <div class="form-group">
+        <label for="product-description">Description</label>
+        <textarea id="product-description" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Main Product Image</label>
+        <div class="profile">
+          <div class="add">
+              <i class="fas fa-camera"></i>
+          </div>
+          <input type="file" accept="image/*" id="mainImage">
+          <div id="profilePreview" class="profilePreview"></div>
+        </div>
+        <div class="text-muted" id="mainImageName">Please select a product image</div>
+      </div>
+    </div>
+    
+    <!-- Category Information -->
+    <div class="section" data-id="B">B. Category Information</div>
+    <div class="card">
+      <div class="form-group">
+        <label>Category</label>
+        <select id="category"></select>
+      </div>
+      <div id="categoryDsc" class="form-group">
+        Category description will be displayed here upon selection
+      </div>
+    </div>
+    
+    <!-- Brand Information -->
+    <div class="section" data-id="C">C. Brand Information</div>
+    <div class="card">
+      <div class="form-group">
+        <label>Brand</label>
+        <input type="text" id="brand">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" id="brandDsc">
+      </div>
+      
+    </div>
+    
+    <!-- Pricing Information -->
+    <div class="section" data-id="D">D. Pricing Information</div>
+    <div class="card">
+      <div class="form-group">
+        <label>Currency</label>
+        <select id="currency">
+          <option value="KES">KES 🇰🇪</option>
+          <option value="USD">USD 🇺🇸</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Base Price</label>
+        <input type="number" id="basePrice" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Price</label>
+        <input type="number" id="price" min="0" step="0.01">
+      </div>
+      <div class="form-group">
+        <label>Stock</label>
+        <input type="number" id="stock" min="0">
+      </div>
+    </div>
+            
+      
+    
+    
+    <div class="section" data-id="E">E. Product Attributes</div>
+    <div class="card">        
+        <div id="product-attributes-head">
+          <div>ID</div>
+          <div>SPECIFICATION</div>
+          <div>VALUE</div> 
+        </div>
+        <div id="product-attributes">
+          <div class="attr-id attr-id1" data-id=1 >1</div>
+          <input type="text" class="attr attr1" placeholder="e.g Storage" data-id=1 /> 
+          <input type="text" class="attr-value attr-value1" placeholder="128GB" data-id=1 /> 
+        </div>
+        <button id="nextAttribute" class="btn-primary-outlined"><i class="fas fa-plus"></i> Add Specification</button>
+    </div>
+    
+   
+    
+    <!-- Product Variants -->
+    <div class="productVariants">
+      <div class="section">F. Product Variants</div>
+      
+      <div class="card" id="property-section">
+        <h2>Properties</h2>
+        <div id="property-container">
+          <!-- Properties will be added here -->
+        </div>
+        <button id="add-property" class="btn-primary">
+          <i class="fas fa-plus"></i> Add Property
+        </button>
+        <div class="actions">
+          <button id="generate-variants" class="btn-primary-outlined">Generate Variants</button>
+        </div>        
+      </div>
+      
+      <div class="card" id="variant-section" style="display: none;">
+        <h2>Variants</h2>
+        <div id="variant-container">
+          <!-- Generated variants will appear here -->
+        </div>
+        <div class="actions">
+          <button id="save-product" class="btn-primary">
+            <i class=""></i> Preview Variants info
+          </button>
+        </div>
+        </div>
+      </div>
+      
+      <div class="card" id="variant-table-container" style="display: none;">
+        <h2>Variant Details</h2>
+        <div style="overflow-x: auto;">
+          <table id="variant-table">
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Properties</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Image</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>        
+      </div>
+      
+      <!-- images -->
+        
+    <div class="section">G. Images</div>    
+    <div class="card">
+        <label>Other product images except variant images and Main product image.</label>
+      <div class="morePicsContainer">
+         <div id="imagesPreview"></div>
+         <div id="addImage">
+             <i class="fas fa-camera"></i>
+             <input type="file" multiple accept="image/*" id="otherProductImages">
+         </div>
+      </div>         
+    </div>
+    
+     <!-- product tags -->
+    <div class="section">H. Product Tags</div>
+    <div class="card">
+      <label>Tags make your product more discoverable in search.</label>
+      
+      <div id="product-tags-head">
+          <div> ID</div>
+          <div> TAG NAME</div> 
+      </div>
+      
+      <div id="product-tags">
+          <div class="tag-id tag-id1" data-id=1 >1</div>
+          <input type="text" class="tagValue tag1" placeholder="e.g smartphone" data-id=1 >
+      </div>
+      
+      <button id="nextTag" class="btn-primary-outlined"><i class="fas fa-tag"></i> Add Tag</button>
+    </div>
+    
+    
+    <!-- Delivery -->
+    <div class="section">I. Delivery</div>
+    <div class="card">
+      <div class="form-group">
+        <label for="delivery-time">Estimated Delivery</label>
+        <select id="delivery-time" name="delivery-time">
+          <option value="24 hours">Less than 24 hours</option>
+          <option value="1-3 working days">1–3 Working Days</option>
+          <option value="1 week">Up to 1 Week</option>
+          <option value="2 weeks">Up to 2 Weeks</option>
+          <option value="3 weeks">Up to 3 Weeks</option>
+          <option value="1 month">Up to 1 Month</option>
+          <option value="2 months">Upto 2 Months</option>
+        </select>
+      </div>
+    </div>
+    
+    
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn btn-primary">
+      <i class="fas fa-shopping-cart"></i> SUBMIT PRODUCT
+    </button>    
+    </div>
+    
+    
+    
+  
+  </div>
+    
+  <script src="myClasses.js"></script>
+  <script src="addProduct.js"></script>
+</body>
+</html>

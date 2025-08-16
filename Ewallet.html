@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My E-Wallet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="Ewallet.css">
+     <link rel="stylesheet" href="userFeeds.css">
+    
+       
+</head>
+<body>
+    
+    <div class="loading">
+      <div style="display:flex; flex-direction: column; align-items: center">
+      <div id="rotatingCircle"></div>
+      <div id="loadFeedback">
+        loading...</div>
+        </div>
+    </div> 
+    
+    <div id="dialogContainer" style="display: none;">   
+        <div class="customConfirm" id="alertDialog">
+            <div class="c-head">Alert</div>
+            <div id="alertMessage" class="confirm-message"></div>
+            <button id="alertOkBtn">OK</button>
+        </div>
+             
+        <div class="customAlert" id="confirmDialog">
+            <div class="c-head">Confirm</div>
+            <div id="confirmMessage" class="confirm-message"></div>
+            <div id="confirm-buttons">
+                <button id="cancelBtn">Cancel</button>
+                <button id="confirmBtn">Proceed</button>
+            </div>
+        </div>
+    </div>
+    
+       
+    
+    <!-- Authentication Forms -->
+    <div class="auth-forms">
+        
+        
+        <div class="offline-state">
+             
+          <i class="bi bi-wifi-off"></i>              
+        <div style="text-align: center">
+            <span class="msg">Connection error </span>
+            <a href="">reload?</a>
+            </div>
+        </div>
+        
+        <form id="newAccount-form" class="auth-form">
+            <div class="form-description">
+                Enter your phone number to register. We'll send you a code to verify your account
+            </div>
+            
+            
+            
+            <div class="input-field">          
+                <div class="country-code">
+                    <select id="selectedCode">
+                        <option value="+254">+254</option>
+                        
+                    </select>
+                    <div class="select-touch"></div>
+                </div>
+                <input type="tel" id="phoneNumber" placeholder="Phone number" pattern="[0-9]{9,15}">
+            </div>
+            
+            <div class="new-number-error">Enter Valid Number</div>
+            
+            <button type="submit" id="submitNew" class="btn-continue">CONTINUE</button>
+        </form>
+        
+        <form id="epayLog">
+            <div class="form-logo">
+                E-account
+            </div>
+            
+            <div class="form-description">
+                Enter Pin
+            </div>
+            
+            <div id="passwordInputs" class="password-inputs">
+                <div class="password-dot p1"></div>
+                <div class="password-dot p2"></div>
+                <div class="password-dot p3"></div>
+                <div class="password-dot p4"></div>
+                <div class="password-dot p5"></div>
+                <div class="password-dot p6"></div>
+            </div>
+            <div id="pinFeedback"></div>
+            <div id="dialPad" class="dial-pad">
+                <button type="button" data-id="1" class="dial-btn">1</button>
+                <button type="button" data-id="2" class="dial-btn">2</button>
+                <button type="button" data-id="3" class="dial-btn">3</button>
+                <button type="button" data-id="4" class="dial-btn">4</button>
+                <button type="button" data-id="5" class="dial-btn">5</button>
+                <button type="button" data-id="6" class="dial-btn">6</button>
+                <button type="button" data-id="7" class="dial-btn">7</button>
+                <button type="button" data-id="8" class="dial-btn">8</button>
+                <button type="button" data-id="9" class="dial-btn">9</button>
+                <button type="button" class="back-btn"><i class="fas fa-delete-left"></i></button>
+                <button type="button" data-id="0" class="dial-btn">0</button>
+                <button class="submit-btn"></button>
+            </div>
+        </form>
+        
+        <footer class="app-footer">
+            <div class="footer-text">POWERED BY</div>
+            <div class="footer-partners">
+                <div>PochiAfrica</div>
+                <div class="footer-divider">E-pay Kenya</div>
+                <div>Jphy Partners</div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Wallet Dashboard -->
+    <div class="epay-container">
+        <!-- Header -->
+        <div class="wallet-header">
+            <h1>My Wallet</h1>
+        </div>
+        
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <div class="balance-label">Available Balance</div>
+            <div class="balance-amount"></div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="depositBtn">
+                    <i class="fas fa-plus"></i> Deposit
+                </button>
+                <button class="btn btn-outline" id="refundBtn">
+                    <i class="fas fa-exchange-alt"></i> Request Refund
+                </button>
+            </div>
+            <div id="userSection" class="user-section">
+                <div class="user-name"></div>
+                <div class="epay-number"></div>
+            </div>
+        </div>
+        
+        <!-- Recent Transactions -->
+        <div class="wallet-section">
+            <div class="section-header">
+                <h2>Recent Transactions</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            
+            <ul class="transaction-list"></ul>
+        </div>
+        
+        <!-- My Coupons -->
+        <div class="wallet-section">
+            <div class="section-header">
+                <h2>My Coupons</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+                                               
+            <div class="coupons-earned"></div>
+        </div>
+        
+        <!-- Wallet Settings -->
+        <div class="wallet-section">
+            <div class="section-header">
+                <h2>Wallet Settings</h2>
+            </div>
+            
+            <ul class="settings-list">
+                <li class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="settings-name">Change PIN</div>
+                    </div>
+                    <a href="#" class="settings-action">Change</a>
+                </li>
+                <li class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="settings-name">Notifications</div>
+                    </div>
+                    <a href="#" class="settings-action">Manage</a>
+                </li>
+                <li class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="settings-name">Security</div>
+                    </div>
+                    <a href="#" class="settings-action">View</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+<div id="deposit-withdraw-refund-forms">
+  <div class="header fl-cn">
+    <i class="fas fa-angle-left navigateBack" ></i>
+    <h2 id="form-title">Deposit Funds</h2>
+  </div>
+  <div class="forms">
+    <form class="deposit-form fl-cn-cl" id="depositForm">
+      <section class="form-group fl-cn-cl">
+        <label for="phoneNumber" class="form-label fw-bold">M-Pesa Phone Number</label>
+        <input type="tel" class="form-control phoneNumber" placeholder="e.g., 254712345678" pattern="^[0-9]{9,12}$">
+        <div id="phoneError" class="error-message">Enter a valid Kenyan number (e.g., 254712345678)</div>
+        <div class="form-check form-switch mt-3">
+          <input class="form-check-input" type="checkbox" id="useDefaultNumber" checked>
+          <label class="form-check-label" for="useDefaultNumber">
+            Use my registered number: <strong id="defaultNumberDisplay">2547******89</strong>
+          </label>
+        </div>
+      </section>
+
+      <section class="form-group fl-cn-cl">
+        <label for="amount" class="form-label fw-bold">Amount (KES)</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light">KES</span>
+          <input type="number" class="form-control" id="amount" min="10" step="1" placeholder="e.g., 500" required>
+        </div>
+        <div id="amountError" class="error-message">Minimum deposit is KES 10</div>
+      </section>
+
+      <div class="form-check mb-4 agreement">
+        <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+        <label class="form-check-label" for="agreeTerms">
+          I agree to SwiftMart's <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+        </label>
+        <div id="termsError" class="error-message">You must accept the terms</div>
+      </div>
+
+      <button type="submit" class="btn btn-swiftmart text-white py-3" id="depositButton">
+        <span id="buttonText" class="btn-text"><i class="fas fa-paper-plane me-2"></i> Continue</span>
+        <span id="spinner" class="spinner-border spinner-border-sm" role="status"></span>
+      </button>
+    </form>
+  </div>  
+  <footer>
+    SwiftMart E-Pay &mdash; Powered by PochiAfrica
+  </footer>
+</div>
+
+<div class="responseContainer" id="responseContainer">
+  <div id="successResponse">
+    <div class="success-check">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <h3 class="mb-3" id="success-title" style="color: var(--swiftmart-success);">Deposit Initiated!</h3>
+    <p class="mb-4" id="success-message">Check your phone to complete the M-Pesa payment. Your wallet will update automatically.</p>
+    <button type="button" class="btn btn-swiftmart text-white px-4" id="successButton" style="width: 50%">
+      <i class="fas fa-thumbs-up me-2"></i> Got It!
+    </button>  
+  </div>
+  
+  <div id="failedResponse">
+    <div class="mb-4" style="color: var(--swiftmart-danger); font-size: 4rem;">
+      <i class="fas fa-times-circle"></i>
+    </div>
+    <h3 class="mb-3" style="color: var(--swiftmart-danger);" id="failed-title">Deposit Failed</h3>
+    <p class="mb-4" id="failed-message">Error message appears here</p>
+    <button type="button" class="btn btn-outline-danger px-4" id="retryButton">
+      <i class="fas fa-redo me-2"></i> Try Again
+    </button>
+    <button class="btn mt-2" id="cancelFailedTransaction">
+      Cancel
+    </button>   
+  </div>
+</div>   
+    
+    <script src="myClasses.js"></script>
+    <script src="Ewallet.js"></script>
+</body>
+</html>

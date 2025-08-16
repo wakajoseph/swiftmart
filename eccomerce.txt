@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Page title</title>
+    <style>
+
+
+
+
+
+body {
+    padding: 0;
+    margin: 0;
+    background:#e6e6e6;
+} 
+      
+.cartContainer { display: flex; flex-direction: column; align-items: center; width: 100%; position: fixed; inset: 0; }
+
+.cartContainer .cartHeader, .cartContainer .cartFooter { display: flex; align-items: center; justify-content: space-between; width: 100%; padding:10px; background: #ffffff; box-sizing: border-box; }
+
+.cartMain {overflow-y: auto; width: 98% ;  box-sizing: border-box;}
+
+.cartContainer .cartHeader { position: sticky; top: 0; }
+
+.cartContainer .navigationContainer { display: flex; gap: 50px; align-items: center; }
+
+.cartContainer .totalItems { font-weight: bold; }
+
+.cartContainer .cartFooter { display: flex; position: sticky; bottom: 0; width: 100%; }
+
+.cartContainer .totalPrice { color: red; font-size: 1.2em; }
+
+.cartContainer .cartFooter .first, .cartContainer .cartFooter .second { display: flex; align-items: center; }
+
+.cartContainer .cartFooter .second { gap: 20px; }
+
+.cartContainer img {
+    width: 100%;
+    height: 100%;
+}
+
+.cartContainer .checkbox { display: flex; align-items: center; justify-content: center; border: 1px solid gray; width: 20px; height: 20px; border-radius: 50%; background: white;color: white; margin: 10px;
+transition: 0.3s ease-in-out;}
+
+.checkbox.clicked {
+    background: black;
+    border: 1px solid black;
+    
+    
+}
+
+.cartContainer .checkOut { background: #bfbfbf; color: white; padding: 16px; border-radius: 50px;}
+
+.cartContainer .checkOut.active {
+    background: linear-gradient(to right, #e62f00, red);
+}
+
+.cartContainer .itemsContainer { width: 100%; background: ; margin-top: 10px;  }
+
+.cartContainer .cart__item { display: flex; flex-direction: column; background: white; width: 100%;padding: 10px; box-sizing: border-box; margin-bottom: 5px; border-radius: 5px }
+
+
+.cartContainer #itemSection { display: flex; width: 100%; }
+
+.cartContainer #itemSection .checkbox { margin: auto 0; aspect-ratio: 1 / 1; }
+
+
+.cartContainer .itemDetails { display: flex; flex-direction: column; justify-content: center; width: 100%;  }
+
+
+
+.cartContainer .itemPic { width: 30%; aspect-ratio: 1/1; margin: 10px; }
+
+.cartContainer #itemSection .name {
+    font-weight: bold;    
+    
+}
+
+.cartContainer .color { background: #f2f2f2; border: 1px solid #ededed; min-width: 0; max-width: max-content; padding: 1px 2px; margin: 2px 0; }
+
+.cartContainer .priceSection { display: flex; align-items: center; justify-content: space-between; padding: 10px; }
+
+.cartContainer .price { font-weight: bold; color: red; font-size: 1.1em; }
+
+.cartContainer .quantity { border: 1px solid #E8EAEC;color: gray; border-radius: 5px; padding: 2px;}
+
+.cartContainer .quantity button { border: none;  color: gray;background: transparent}
+
+.relatedItemsContainer {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border: ;
+    gap: 3px;
+    margin-top: 10px;
+    justify-items: center;  
+}
+
+.relatedItemsContainer div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 8px;
+    background: white;
+}
+
+.shippingPolicy {
+    width: 100%;
+    color: gray;
+    background: white;
+    margin: 10px 0;
+    padding: 10px 0; 
+    display: flex;
+    justify-items: space-around; 
+}
+
+.shippingPolicy div {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.7em;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    
+}
+
+.shippingPolicy div .fas {
+    color: green;
+    font-size: 1.6em;
+    padding: 5px;
+}
+
+
+      
+        
+</style>     
+    
+<body> 
+ 
+ 
+ 
+    
+    <div class="cartContainer">
+        <div class="cartHeader">
+            <div class="navigationContainer"><span  onclick="navigateBack()">❮</span>
+ <span class="totalItems"></span></div>
+         <div>Edit</div>             
+        </div>
+        <!-- 👆🏼top -->
+        
+  
+      
+   <div class="cartMain">      
+  <div class="itemsContainer">  </div>
+  <div class="shippingPolicy">
+      <div>
+    <i class="fas fa-shield-alt"></i> Safe & Secure payment
+</div>
+<div>
+    <i class="fas fa-lock"></i> Secure privacy 
+</div>
+<div>
+    <i class="fas fa-truck"></i>
+    <span>Delivery guaranteed </span> 
+</div>
+<div>
+    <i class="fas fa-box-open"></i> friendly after sell services
+</div>
+  </div>
+  <div class="relatedItemsContainer">
+      <div>1</div>
+      <div>2</div>
+  </div>
+  </div>    
+        
+      <!-- 👇🏼bottom -->
+        
+        <div class="cartFooter">
+            <div class="first">
+          <div class="checkbox" onclick="toggleAllCheckBox()"></div>
+          <div>All</div>
+             </div>
+             <div class="second">
+          <div class="totalPrice"></div>
+          <div class="checkOut">Check Out <span id="totalCheckOut"></span></div>
+          </div>
+        </div>
+    </div>
+<script src="data.js"></script>
+<script src="cart.js"></script>
+
+</body>
+</html>
+
+<!-- js -->
+
+let cartItems = [];
+let originalamount = [];
+let itemsChecked = [];
+let amount = [];
+
+
+const [totalProducts, totalAmount, cartContainer, relatedItemsContainer, totalChecked, buy] = [".totalItems", ".totalAmount", ".itemsContainer", ".relatedItemsContainer", "#totalCheckOut", ".checkOut"].map((className) => document.querySelector(className));
+
+  
+ totalProducts.textContent = `Cart (${data.length})`; 
+  
+
+function updateUserCart() {
+  if (!Array.isArray(data) || data.length === 0) return; // Ensure data is valid
+
+  data.forEach((item, index) => {
+    cartItems[index] = 1; 
+    originalamount[index] = item.price;
+    itemsChecked[index] = false;
+    amount[index] = 0;
+
+    let cartHtml = document.createElement('div');
+    cartHtml.classList.add("cart__item");
+    cartHtml.innerHTML = `
+      <div id="storeName">
+        <i class="fas fa-store"></i><span>${item.seller.name}</span>
+      </div>
+      <div id="itemSection">
+        <div class="checkbox cb${index}" onclick="check(${index})"><i class="fas fa-check"></i></div>
+        <div class="itemPic">
+          <img src="${item.imageUri[0]}" alt="${item.name}"/>
+        </div>
+        <div class="itemDetails">
+          <div class="name">${item.name.slice(0, 20)}...</div>
+          <div class="color">${item.color ? item.color : ""}</div>
+          <div class="priceSection">
+            <div class="price">KSh ${item.price.toLocaleString()}</div>
+            <div class="quantity">
+              <button onclick="reduceQuantity(${index})">❮</button>
+              <span id="quantity-${index}">${cartItems[index]}</span>
+              <button onclick="addQuantity(${index})">❯</button>
+            </div>
+          </div>
+        </div>
+      </div>        
+    </div>`;
+
+    cartContainer.appendChild(cartHtml);
+  });
+
+  sumAmount(); // Call this only once after the loop
+}
+
+function check(index) {
+  const checkbox = document.querySelector(`.cb${index}`);
+  if (!checkbox) return;
+
+  checkbox.classList.toggle('clicked');
+  itemsChecked[index] = !itemsChecked[index];    
+  totalCheckedItems(index);
+}
+
+function toggleAllCheckBox() {
+  const checkboxes = document.querySelectorAll('.checkbox');
+  if (checkboxes.length === 0) return;
+
+  const allChecked = Array.from(checkboxes).every(checkbox => checkbox.classList.contains('clicked'));
+
+  checkboxes.forEach(checkbox => {
+    checkbox.classList.toggle('clicked', !allChecked);
+  });
+
+  const newState = !allChecked;
+  itemsChecked = itemsChecked.map(() => newState);
+
+  cartItems.forEach((_, index) => totalCheckedItems(index));
+}
+
+function totalCheckedItems(index) {
+  if (!itemsChecked[index]) {
+    amount[index] = 0;
+  } else {
+    amount[index] = originalamount[index] * cartItems[index];
+  }
+  
+let selectedNumber = itemsChecked.filter(item => item === true).length;
+console.log(selectedNumber); 
+
+if (selectedNumber > 0) {
+    buy.classList.add('active');
+    totalChecked.textContent = `( ${selectedNumber} )`;
+} else {
+    buy.classList.remove('active');
+    totalChecked.textContent = "";
+}
+  
+  sumAmount();
+}
+
+function reduceQuantity(index) {
+  if (cartItems[index] > 1) {
+    cartItems[index] -= 1;
+    document.getElementById(`quantity-${index}`).innerText = cartItems[index];
+    totalCheckedItems(index);
+  }
+}
+
+function addQuantity(index) {
+  cartItems[index] += 1;
+  document.getElementById(`quantity-${index}`).innerText = cartItems[index];
+  totalCheckedItems(index);
+}
+
+function sumAmount() {
+  let total = amount.reduce((prev, next) => prev + next, 0);
+  const totalPriceElement = document.querySelector(".totalPrice");
+  if (totalPriceElement) {
+    totalPriceElement.innerText = `KSh ${total.toLocaleString()}`;
+  }
+}
+
+<!-- 👆🏼👆🏼👆🏼cart -->

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Preview</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <button onclick="addCategory()">Add Category</button>
+    <p class="feedback">Feedback</p>
+    <script>
+        
+       let categories = [
+  { "id": 1, "name": "smartphones", "description": "Latest smartphones with advanced features and stylish design."},
+  { "id": 2, "name": "Electronics", "description": "Gadgets, devices, and consumer electronics." },
+  { "id": 3, "name": "Mobile Phones", "description": "Smartphones from all major brands and models." },
+  { "id": 4, "name": "Laptops & Computers", "description": "Desktops, laptops, and computer peripherals." },
+  { "id": 5, "name": "Tablets & Accessories", "description": "Tablets, styluses, and related gear." },
+  { "id": 6, "name": "Phone Accessories", "description": "Phone covers, chargers, screen guards, and more." },
+  { "id": 7, "name": "Men's Clothing", "description": "Casual, formal, and ethnic wear for men." },
+  { "id": 8, "name": "Women's Clothing", "description": "Tops, dresses, lingerie, and more for women." },
+  { "id": 9, "name": "Kids' Clothing", "description": "Clothing for toddlers, children, and teens." },
+  { "id": 10, "name": "Men's Shoes", "description": "Sneakers, formals, boots, and sandals for men." },
+  { "id": 11, "name": "Women's Shoes", "description": "Heels, flats, sneakers, and boots for women." },
+  { "id": 12, "name": "Kids' Shoes", "description": "Comfortable and stylish shoes for kids." },
+  { "id": 13, "name": "Watches", "description": "Analog, digital, and smartwatches for all." },
+  { "id": 14, "name": "Bags & Backpacks", "description": "Handbags, purses, laptop bags, and backpacks." },
+  { "id": 15, "name": "Jewelry", "description": "Rings, necklaces, bracelets, and fashion jewelry." },
+  { "id": 16, "name": "Beauty", "description": "Beauty products including grooming kits and fragrances." },
+  { "id": 17, "name": "Skincare", "description": "Cleansers, moisturizers, and skincare routines." },
+  { "id": 18, "name": "Haircare", "description": "Shampoos, conditioners, and hair treatment products." },
+  { "id": 19, "name": "Makeup", "description": "Lipsticks, foundation, and full makeup kits." },
+  { "id": 20, "name": "Health & Wellness", "description": "Supplements, vitamins, and health-monitoring devices." },
+  { "id": 21, "name": "Fitness Equipment", "description": "Treadmills, weights, and home gym gear." },
+  { "id": 22, "name": "Sportswear", "description": "Fitness and athletic wear for men and women." },
+  { "id": 23, "name": "Outdoor Gear", "description": "Tents, hiking gear, and outdoor survival kits." },
+  { "id": 24, "name": "Toys", "description": "Educational, creative, and fun toys for all ages." },
+  { "id": 25, "name": "Baby Products", "description": "Newborn to toddler essentials and accessories." },
+  { "id": 26, "name": "Diapers & Wipes", "description": "All baby diapers, wipes, and changing essentials." },
+  { "id": 27, "name": "Strollers & Car Seats", "description": "Infant travel and transport solutions." },
+  { "id": 28, "name": "Books", "description": "Fiction, nonfiction, textbooks, and eBooks." },
+  { "id": 29, "name": "Office Supplies", "description": "Paper, pens, printers, and office essentials." },
+  { "id": 30, "name": "Home Decor", "description": "Vases, wall art, and interior accents." },
+  { "id": 31, "name": "Furniture", "description": "Sofas, chairs, desks, and storage furniture." },
+  { "id": 32, "name": "Lighting", "description": "Lamps, ceiling lights, and decorative lighting." },
+  { "id": 33, "name": "Bedding", "description": "Bedsheets, comforters, and pillows." },
+  { "id": 34, "name": "Kitchenware", "description": "Utensils, gadgets, and storage for the kitchen." },
+  { "id": 35, "name": "Appliances", "description": "Microwaves, refrigerators, and blenders." },
+  { "id": 36, "name": "Cookware", "description": "Pots, pans, and kitchen cooking tools." },
+  { "id": 37, "name": "Tableware", "description": "Plates, glasses, and cutlery." },
+  { "id": 38, "name": "Groceries", "description": "Daily groceries and pantry staples." },
+  { "id": 39, "name": "Snacks", "description": "Chips, chocolates, and packaged treats." },
+  { "id": 40, "name": "Beverages", "description": "Sodas, juices, and health drinks." },
+  { "id": 41, "name": "Pet Supplies", "description": "Food, grooming, and care items for pets." },
+  { "id": 42, "name": "Cat Supplies", "description": "Toys, food, and accessories for cats." },
+  { "id": 43, "name": "Dog Supplies", "description": "Toys, food, and accessories for dogs." },
+  { "id": 44, "name": "Automotive", "description": "Car parts, cleaning kits, and accessories." },
+  { "id": 45, "name": "Car Electronics", "description": "Speakers, dash cams, and car chargers." },
+  { "id": 46, "name": "Tools & Equipment", "description": "Hardware tools and repair kits." },
+  { "id": 47, "name": "Garden Supplies", "description": "Seeds, pots, and gardening tools." },
+  { "id": 48, "name": "Power Tools", "description": "Drills, saws, and power machines." },
+  { "id": 49, "name": "Musical Instruments", "description": "Guitars, keyboards, drums, and accessories." },
+  { "id": 50, "name": "Gaming Consoles", "description": "PlayStation, Xbox, and Nintendo consoles." },
+  { "id": 51, "name": "Video Games", "description": "New and classic video games for all platforms." },
+  { "id": 52, "name": "Cameras & Photography", "description": "DSLRs, lenses, and camera accessories." },
+  { "id": 53, "name": "Smart Home Devices", "description": "Smart bulbs, locks, and connected devices." },
+  { "id": 54, "name": "TV & Home Theater", "description": "LED TVs, soundbars, and home theater systems." },
+  { "id": 55, "name": "Networking Devices", "description": "Wi-Fi routers, extenders, and networking gear." },
+  { "id": 56, "name": "Seasonal Products", "description": "Holiday decor, summer gear, and seasonal picks." },
+  { "id": 57, "name": "Stationery", "description": "Notebooks, journals, and planners." },
+  { "id": 58, "name": "Craft Supplies", "description": "Paint, glue, and hobby kits." },
+  { "id": 59, "name": "Travel Accessories", "description": "Neck pillows, organizers, and travel gear." },
+  { "id": 60, "name": "Luggage", "description": "Suitcases, trolleys, and cabin bags." },
+  // ---- CLOTHING ----
+  { "id": 61, "name": "Unisex Clothing", "description": "Gender-neutral apparel for all ages." },
+  { "id": 62, "name": "Winter Wear", "description": "Coats, jackets, gloves, scarves, and thermal wear." },
+  { "id": 63, "name": "Swimwear", "description": "Swimsuits, bikinis, swim trunks, and cover-ups." },
+  { "id": 64, "name": "Activewear", "description": "Workout leggings, gym shorts, and performance tops (unisex)." },
+  { "id": 65, "name": "Maternity Clothing", "description": "Clothing designed for pregnancy and nursing." },
+  { "id": 66, "name": "Plus-Size Clothing", "description": "Extended sizes for men and women." },
+  { "id": 67, "name": "Underwear (General)", "description": "Briefs, boxers, socks, and undershirts (unisex)." },
+  { "id": 68, "name": "Workwear & Uniforms", "description": "Professional attire, scrubs, and safety gear." },
+  { "id": 69, "name": "Traditional & Cultural Wear", "description": "Ethnic clothing for global cultures." },
+  { "id": 70, "name": "Loungewear", "description": "Pajamas, robes, and home comfort clothing." },
+
+  // ---- SHOES ----
+  { "id": 71, "name": "Shoes (General)", "description": "Unisex footwear for everyday use." },
+  { "id": 72, "name": "Athletic Shoes", "description": "Running, training, and sports shoes (unisex)." },
+  { "id": 73, "name": "Winter Boots", "description": "Snow boots, insulated footwear, and rain boots." },
+  { "id": 74, "name": "Work & Safety Shoes", "description": "Steel-toe boots and non-slip work footwear." },
+  { "id": 75, "name": "Slippers & House Shoes", "description": "Comfortable indoor footwear." },
+
+  // ---- OTHER MISSING GAPS ----
+  { "id": 76, "name": "Accessories (General)", "description": "Hats, belts, gloves, and scarves (unisex)." },
+  { "id": 77, "name": "Costumes & Cosplay", "description": "Themed outfits for events and performances." },
+  { "id": 78, "name": "Vintage & Secondhand", "description": "Pre-owned clothing and shoes." },
+  { "id": 79, "name": "Custom & Tailored", "description": "Made-to-order clothing and alterations." },
+  { "id": 80, "name": "Subscription Boxes", "description": "Curated clothing/shoe deliveries by style." },
+  { "id": 61, "name": "Headphones & Audio", "description": "Wired and wireless headphones, earphones, and speakers." },
+  { "id": 62, "name": "Wearable Technology", "description": "Fitness trackers, smart glasses, and health monitors." },
+  { "id": 63, "name": "Drones & Accessories", "description": "Camera drones, racing drones, and spare parts." },
+  { "id": 64, "name": "VR & AR Equipment", "description": "Virtual reality headsets and augmented reality gear." },
+  { "id": 65, "name": "Bathroom Essentials", "description": "Towels, bath mats, shower curtains, and accessories." },
+  { "id": 66, "name": "Cleaning Supplies", "description": "Brooms, mops, detergents, and household cleaners." },
+  { "id": 67, "name": "Home Organization", "description": "Storage boxes, shelves, and closet organizers." },
+  { "id": 68, "name": "Winter Wear", "description": "Coats, jackets, gloves, and scarves for cold weather." },
+  { "id": 69, "name": "Swimwear", "description": "Swimsuits, bikinis, swim trunks, and beach accessories." },
+  { "id": 70, "name": "Maternity Clothing", "description": "Clothing designed for pregnant women." },
+  { "id": 71, "name": "Oral Care", "description": "Toothbrushes, toothpaste, mouthwash, and dental floss." },
+  { "id": 72, "name": "First Aid & Medical Supplies", "description": "Bandages, thermometers, and basic medical kits." },
+  { "id": 73, "name": "Baby Food & Feeding", "description": "Baby formula, bottles, and feeding accessories." },
+  { "id": 74, "name": "Bicycles & Accessories", "description": "Mountain bikes, road bikes, helmets, and bike locks." },
+  { "id": 75, "name": "Fishing Gear", "description": "Fishing rods, reels, bait, and tackle boxes." },
+  { "id": 76, "name": "Motorcycle Accessories", "description": "Helmets, gloves, and bike maintenance tools." },
+  { "id": 77, "name": "Party Supplies", "description": "Balloons, decorations, and disposable tableware." },
+  { "id": 78, "name": "Board Games", "description": "Classic and modern board games for all ages." },
+  { "id": 79, "name": "Digital Products", "description": "E-books, software licenses, and digital subscriptions." },
+  { "id": 80, "name": "Shoes (General)", "description": "Footwear for all purposes, including unisex options." }
+];
+
+
+async function addCategory() {
+        let feedback = document.querySelector('.feedback');
+
+        if (!categories || categories.length === 0) {
+            feedback.innerText = "No category found";
+            return;
+        } else {
+            feedback.innerText = "Processing...";
+        }
+
+        category = [];
+        categories.forEach((c) => {
+            const ctg = {
+             "name": c.name,
+             "description": c.description
+            }
+            
+            category.push(ctg);
+        });
+        
+
+        try {
+            const response = await fetch("http://localhost:8000/api/v1/categories/new", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(category)
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const message = `${data.inserted.length} categories added, ${data.existing.length} categories already existed.`;
+                feedback.innerText = message;
+            } else {
+                feedback.innerText = `Server error: ${response.statusText}`;
+            }
+        } catch (error) {
+            feedback.innerText = `Error: ${error.message}`;
+        }
+    }
+ 
+    
+
+    </script>
+</body>
+</html>

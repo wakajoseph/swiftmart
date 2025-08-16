@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wallet</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+       :root {
+            --primary: #2c6485;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --warning: #ea580c;
+            --danger: #dc2626;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --border: #cbd5e1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+        
+        .epay-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+            background-color: #f1f5f9;
+            color: var(--dark);
+            line-height: 1.5;
+        }
+        
+        /* Header */
+        .epay-container .wallet-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+   .epay-container .wallet-header h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Balance Card */
+       .epay-container .balance-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+       .epay-container .balance-label {
+            color: var(--gray);
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+       .epay-container .balance-amount {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+      .epay-container #userSection {
+            
+            color: var(--primary);
+            margin-top: 10px;
+            font-weight: 700;
+            display: flex;
+            justify-content: ;
+        }
+      .epay-container .userName {
+            font-weight: 800;
+            width: 60%;
+            text-align: left;
+        }
+      .epay-container .ePayNumber {
+            border-left: 3px solid var(--primary);
+            text-align: right;
+            flex: 1;
+        }
+        
+      .epay-container .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+       .epay-container .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+     .epay-container .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+      .epay-container .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+        
+        /* Wallet Sections */
+        .wallet-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+      .epay-container .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+    .epay-container .section-header h2 {
+            font-size: 18px;
+            color: var(--dark);
+        }
+        
+      .epay-container .view-all {
+            color: var(--primary);
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* Transactions List */
+      .epay-container .transaction-list {
+            list-style: none;
+        }
+        
+      .epay-container .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+     .epay-container .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+      .epay-container .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+      .epay-container .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        
+        .transaction-icon.deposit {
+            background-color: rgba(22, 163, 74, 0.1);
+            color: var(--success);
+        }
+        
+        .transaction-icon.refund {
+            background-color: rgba(234, 88, 12, 0.1);
+            color: var(--warning);
+        }
+        
+        .transaction-icon.payment {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+        
+        .transaction-details h4 {
+            font-size: 15px;
+            margin-bottom: 3px;
+        }
+        
+        .transaction-details p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        .transaction-amount {
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        .transaction-amount.deposit {
+            color: var(--success);
+        }
+        
+        .transaction-amount.refund {
+            color: var(--warning);
+        }
+        
+        .transaction-amount.payment {
+            color: var(--danger);
+        }
+        
+        /* Coupons Section */
+        .coupon-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px dashed var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .coupon-details h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .coupon-details p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        .coupon-code {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+        
+        /* Settings Section */
+        .settings-list {
+            list-style: none;
+        }
+        
+        .settings-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .settings-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+        
+        .settings-name {
+            font-weight: 500;
+        }
+        
+        .settings-action {
+            color: var(--primary);
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+          .epay-container .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        } 
+    </style>
+</head>
+<body>
+    <div class="epay-container">
+        <!-- Header -->
+        <div class="wallet-header">
+            <h1>My Wallet</h1>
+        </div>
+        
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <div class="balance-label">Available Balance</div>
+            <div class="balance-amount"></div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="depositBtn">
+                    <i class="fas fa-plus"></i> Deposit
+                </button>
+                <button class="btn btn-outline" id="refundBtn">
+                    <i class="fas fa-exchange-alt"></i> Request Refund
+                </button>
+            </div>
+            <div id="userSection">
+              <div class="userName"></div>
+              <div class="ePayNumber"></div>
+            </div>
+            
+        </div>
+      
+        
+ 
+        <!-- Recent Transactions -->
+        <div class="wallet-section">
+            <div class="section-header">
+                <h2>Recent Transactions</h2>
+                <a href="#" class="view-all">View All</a>
+            </div>
+            
+            <ul class="transaction-list">
+             
+            </ul>
+        </div>
+        
+        <!-- My Coupons -->
+        <div class="wallet-section">
+            <div class="section-header">
+                <h2>My Coupons</h2>
+                <a href="#" class="view-all">View All</a>
+                
+            </div>
+                                               
+           <div class="couponsEarned">               
+           </div>
+            
+        </div>
+        
+        
+        <!-- Wallet Settings -->
+        <div class="wallet-section">
+            <div class="section-header">
+                <h2>Wallet Settings</h2>
+            </div>
+            
+            <ul class="settings-list">
+                <li class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="settings-name">Change PIN</div>
+                    </div>
+                    <a href="#" class="settings-action">Change</a>
+                </li>
+                <li class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="settings-name">Notifications</div>
+                    </div>
+                    <a href="#" class="settings-action">Manage</a>
+                </li>
+                <li class="settings-item">
+                    <div class="settings-info">
+                        <div class="settings-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="settings-name">Security</div>
+                    </div>
+                    <a href="#" class="settings-action">View</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        
+        document.getElementById('depositBtn').addEventListener('click', function() {
+                alert('Deposit functionality would open here with payment options');
+            });
+            
+            // Refund button
+            document.getElementById('refundBtn').addEventListener('click', function() {
+                alert('Refund request form would open here');
+            });
+            
+            // Simulate settings actions
+            document.querySelectorAll('.settings-action').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const settingName = this.closest('.settings-item').querySelector('.settings-name').textContent;
+                    alert(`${settingName} settings would open here`);
+                });
+            });
+            
+let balance = document.querySelector(".balance-amount");         
+let depositBtn = document.querySelector("#depositBtn");
+let refundBtn = document.querySelector("#refundBtn");
+let accountName = document.querySelector(".userName");
+let eNumber = document.querySelector(".ePayNumber");
+let transactions = document.querySelector(".transaction-list")
+let viewAllTransactionBtn = document.querySelector(".view-all");
+let couponsContainer = document.querySelector(".couponsEarned");
+     
+let accountData;
+
+
+
+function uitxt(sel, txt) {
+    if (!sel || !txt) return;
+    sel.innerText = txt;
+}
+
+function updateUi(data) {
+    if (!data) return;
+    
+    uitxt(balance, `${data.account.currency} ${data.account.balance}`);
+    uitxt(eNumber, data.phone);
+    console.log(data.userName)
+    uitxt(accountName, data.userName);
+    
+    if (data.transactions.length < 1) {
+    transactions.innerHTML = `<div class="no items">No Recent Transactions</div>`;
+} else {
+    const typeClasses = {
+        deposit: ['deposit', 'fa-arrow-down', '+'],
+        purchase: ['payment', 'fa-shopping-cart', '-'],
+        refund: ['refund', 'fa-undo', '']
+    };
+
+    transactions.innerHTML = ''; 
+    data.transactions.forEach((t) => {
+        let item = document.createElement('li');
+        item.className = "transaction-item";
+
+        const classes = typeClasses[t.type];
+
+        item.innerHTML = `
+            <div class="transaction-info">
+                <div class="transaction-icon ${classes[0]}">
+                    <i class="fas ${classes[1]}"></i>
+                </div>
+                <div class="transaction-details">
+                    <h4>${t.tag}</h4>
+                    <p>${t.date}</p>
+                </div>
+            </div>
+            <div class="transaction-amount ${classes[0]}">${classes[2]}${t.amount}</div>
+        `;
+
+        transactions.appendChild(item);
+    });
+  }
+  
+  if (data.coupons.length > 0) {
+    couponsContainer.innerHTML = '';        
+    data.coupons.forEach(c => {
+        let item = document.createElement('div');
+        item.className = 'coupon-card';
+        item.innerHTML = `     
+          <div class="coupon-details">
+              <h4>${c.name}</h4>
+              <p>Expires: ${c.expires}</p>
+          </div>
+          <div class="coupon-code">${c.code}</div>
+         `;
+       couponsContainer.appendChild(item);  
+    })
+  }
+  
+  
+} 
+
+async function getUserAccountData(id, password) {
+    try {
+        let response = await fetch("http://localhost:8000/user/e-account/login", {
+       method: 'POST',
+       headers: {'Content-Type': 'application/json'},
+       body: JSON.stringify({"userId": id, "password": password}),
+       });
+       
+       if (!response.ok) {
+           throw newError(response.status);           
+       }
+       data = await response.json();
+       accountData = {...data};
+       updateUi(accountData);
+    
+    } catch(error) {
+        console.log(error.message)
+    }
+}
+
+getUserAccountData(1, 0000);
+
+
+<!--  
+ accountData = {
+    userId: 1,
+    userName: "JOSEPH O. WAKA",
+    eNumber: "0114771230",
+    email: "joseph.waka@example.com",
+    phone: "+254114771230", 
+    joinDate: "Jan 15, 2023", 
+    lastLogin: "Jun 2, 2025 09:15AM", 
+    
+    // Account Details
+    account: {
+        currency: "KES",
+        balance: 500245.00,
+        availableBalance: 500245.00, 
+        accountStatus: "active", 
+        tier: "gold", 
+        points: 1250, 
+    },
+    
+  
+    security: {
+        twoFactorEnabled: true,
+        lastPasswordChange: "Mar 10, 2025",
+        verified: true
+    },
+    
+    
+    paymentMethods: [
+        {
+            id: 1,
+            type: "mpesa",
+            number: "254114771230",
+            isDefault: true
+        },
+        {
+            id: 2,
+            type: "card",
+            last4: "4242",
+            brand: "visa",
+            expiry: "12/26"
+        }
+    ],
+    
+    // Coupons/Discounts
+    coupons: [
+        {
+            id: "CPN1001",
+            name: "10% Off Next Purchase",
+            code: "SAVE10",
+            discountType: "percentage",
+            value: 10,
+            minPurchase: 1000, 
+            expires: "2025-06-30T23:59:59", 
+            applicableCategories: ["all"], 
+            used: false
+        },             
+        {
+            id: "CPN1002",
+            name: "Free Shipping",
+            code: "FREESHIP",
+            discountType: "fixed",
+            value: 150, 
+            expires: "2025-07-15T23:59:59",
+            applicableCategories: ["all"],
+            used: false
+        }
+    ],
+    
+    transactions: [
+        {
+            id: "TXN202505120843",
+            type: "deposit",
+            method: "mpesa", 
+            tag: "Wallet Deposit",
+            date: "2025-05-12T08:43:00",
+            amount: 4000.00,
+            fee: 0, 
+            status: "completed",
+            reference: "MPESA123456789"
+        }, 
+        {
+            id: "TXN202506011543",
+            type: "purchase",
+            tag: "Online Purchase",
+            storeId: 1,
+            storeName: "PochiAfrica kids",
+            orderId: "ORD-78945",
+            date: "2025-06-01T15:43:00",
+            amount: 5000.00,
+            status: "completed",
+            items: [
+                {
+                    productId: 101,
+                    name: "Kids T-shirt",
+                    quantity: 2,
+                    price: 1500.00
+                },
+                {
+                    productId: 205,
+                    name: "Kids Shoes",
+                    quantity: 1,
+                    price: 2000.00
+                }
+            ]
+        }, 
+        {
+            id: "TXN202506012241",
+            type: "refund",
+            refundId: "REF-78945-01",
+            originalTransactionId: "TXN202506011543", 
+            tag: "Refund Processing",
+            reason: "Product return", 
+            date: "2025-06-01T22:41:00",
+            amount: 4000.00,
+            number: "0114771230",
+            status: "pending",
+            expectedCompletion: "2025-06-05"
+        }
+    ],
+    
+    // Additional useful data
+    stats: {
+        totalDeposits: 1500245.00,
+        totalSpent: 999000.00,
+        last30DaysSpent: 25000.00
+    },
+    
+    // Settings/preferences
+    preferences: {
+        notifications: {
+            deposit: true,
+            withdrawal: true,
+            purchase: true,
+            promo: true
+        },
+        currencyPreference: "KES",
+        language: "en"
+    }
+};  
+    
+-->
+
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM Elements
+    const balance = document.querySelector(".balance-amount");
+    const depositBtn = document.getElementById('depositBtn');
+    const refundBtn = document.getElementById('refundBtn');
+    const accountName = document.querySelector(".userName");
+    const eNumber = document.querySelector(".ePayNumber");
+    const transactions = document.querySelector(".transaction-list");
+    const viewAllTransactionBtn = document.querySelector(".view-all");
+    const couponsContainer = document.querySelector(".couponsEarned");
+    
+    // Event Listeners
+    depositBtn.addEventListener('click', handleDeposit);
+    refundBtn.addEventListener('click', handleRefund);
+    
+    document.querySelectorAll('.settings-action').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const settingName = this.closest('.settings-item').querySelector('.settings-name').textContent;
+            alert(`${settingName} settings would open here`);
+        });
+    });
+    
+    // Initialize the app
+    getUserAccountData(4, "0000");
+
+    // Functions
+    function handleDeposit() {
+        alert('Deposit functionality would open here with payment options');
+    }
+    
+    function handleRefund() {
+        alert('Refund request form would open here');
+    }
+    
+    function updateUiElement(element, text) {
+        if (!element || !text) return;
+        element.innerText = text;
+    }
+
+    function updateUi(data) {
+        if (!data) return;
+        
+        updateUiElement(balance, `${data.account.currency} ${data.account.balance.toLocaleString()}`);
+        updateUiElement(eNumber, data.phone);
+        updateUiElement(accountName, data.userName);
+        
+        renderTransactions(data.transactions);
+        renderCoupons(data.coupons);
+    }
+    
+    function renderTransactions(transactions) {
+        if (!transactions || transactions.length < 1) {
+            transactions.innerHTML = `<div class="no-items">No Recent Transactions</div>`;
+            return;
+        }
+        
+        const typeClasses = {
+            deposit: ['deposit', 'fa-arrow-down', '+'],
+            purchase: ['payment', 'fa-shopping-cart', '-'],
+            refund: ['refund', 'fa-undo', '']
+        };
+
+        transactions.innerHTML = '';
+        transactions.forEach((t) => {
+            const classes = typeClasses[t.type] || ['payment', 'fa-exchange-alt', ''];
+            
+            const item = document.createElement('li');
+            item.className = "transaction-item";
+            item.innerHTML = `
+                <div class="transaction-info">
+                    <div class="transaction-icon ${classes[0]}">
+                        <i class="fas ${classes[1]}"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <h4>${t.tag}</h4>
+                        <p>${t.date}</p>
+                    </div>
+                </div>
+                <div class="transaction-amount ${classes[0]}">${classes[2]}${t.amount.toLocaleString()}</div>
+            `;
+
+            transactions.appendChild(item);
+        });
+    }
+    
+    function renderCoupons(coupons) {
+        if (!coupons || coupons.length < 1) {
+            couponsContainer.innerHTML = `<div class="no-coupons">No active coupons</div>`;
+            return;
+        }
+        
+        couponsContainer.innerHTML = '';
+        coupons.forEach(c => {
+            const item = document.createElement('div');
+            item.className = 'coupon-card';
+            item.innerHTML = `     
+                <div class="coupon-details">
+                    <h4>${c.name}</h4>
+                    <p>Expires: ${new Date(c.expires).toLocaleDateString()}</p>
+                </div>
+                <div class="coupon-code">${c.code}</div>
+            `;
+            couponsContainer.appendChild(item);  
+        });
+    }
+    
+    async function getUserAccountData(id, password) {
+        try {
+            const response = await fetch("http://localhost:8000/user/e-account/login", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({"userId": id, "password": password}),
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            updateUi(data);
+        
+        } catch(error) {
+            console.error("Error fetching account data:", error.message);
+            // Show error to user in UI
+            transactions.innerHTML = `<div class="error">Error loading transactions. Please try again later.</div>`;
+        }
+    }
+
+});
+
+    </script>
+</body>
+</html>

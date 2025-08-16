@@ -1,0 +1,285 @@
+/* ################# */
+/* ## 1.LOADERS   ## */
+/* ################# */
+
+.loading {  
+  position: fixed;  
+  top: 0;  
+  left: 0;
+  z-index: 100000000000;  
+  background: #0000009b;
+  height: 100vh;  
+  width: 100vw;  
+  display: none;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: center;  
+  backdrop-filter: blur(2px);
+}
+
+#loadFeedback {  
+  color: #fff;  
+  font-weight: 600;  
+  margin-top: 15px;  
+  font-family: Arial, sans-serif;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
+  text-align: center;
+  
+}
+
+
+.preloader {
+  position: relative;
+  width: 40px; 
+  height: 40px;
+}
+
+
+.preloader div {
+  transform-origin: 20px 20px;
+  animation: fade 1.2s linear infinite;
+}
+
+.preloader div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 2px;     
+  left: 18px;    
+  width: 3px;  
+  height: 9px;  
+  border-radius: 1.5px;
+}
+
+/* Rotations + colors */
+.preloader div:nth-child(1)  { transform: rotate(0deg);   animation-delay: -1.1s; }
+.preloader div:nth-child(1):after  { background: #000; }
+.preloader div:nth-child(2)  { transform: rotate(30deg);  animation-delay: -1.0s; }
+.preloader div:nth-child(2):after  { background: #e6e6e6; }
+.preloader div:nth-child(3)  { transform: rotate(60deg);  animation-delay: -0.9s; }
+.preloader div:nth-child(3):after  { background: #cccccc; }
+.preloader div:nth-child(4)  { transform: rotate(90deg);  animation-delay: -0.8s; }
+.preloader div:nth-child(4):after  { background: #b3b3b3; }
+.preloader div:nth-child(5)  { transform: rotate(120deg); animation-delay: -0.7s; }
+.preloader div:nth-child(5):after  { background: #999999; }
+.preloader div:nth-child(6)  { transform: rotate(150deg); animation-delay: -0.6s; }
+.preloader div:nth-child(6):after  { background: #808080; }
+.preloader div:nth-child(7)  { transform: rotate(180deg); animation-delay: -0.5s; }
+.preloader div:nth-child(7):after  { background: #666666; }
+.preloader div:nth-child(8)  { transform: rotate(210deg); animation-delay: -0.4s; }
+.preloader div:nth-child(8):after  { background: #4d4d4d; }
+.preloader div:nth-child(9)  { transform: rotate(240deg); animation-delay: -0.3s; }
+.preloader div:nth-child(9):after  { background: #202020; }
+.preloader div:nth-child(10) { transform: rotate(270deg); animation-delay: -0.2s; }
+.preloader div:nth-child(10):after { background: #1a1a1a; }
+.preloader div:nth-child(11) { transform: rotate(300deg); animation-delay: -0.1s; }
+.preloader div:nth-child(11):after { background: #0d0d0d; }
+.preloader div:nth-child(12) { transform: rotate(330deg); animation-delay: 0s; }
+.preloader div:nth-child(12):after { background: #000000; }
+
+@keyframes fade {
+  0% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+
+
+/* ################# */
+/* ## 2. ALERTS   ## */
+/* ################# */
+
+        #dialogContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            z-index: 100000000000000000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        
+        
+        .customAlert, 
+        .customConfirm {
+           background: white;
+           border-radius: 10px; 
+           padding: 25px;
+           width: 300px;
+           max-width: 90%;
+           color: #454545;
+           text-align: center; 
+           display: none;          
+           flex-direction: column;
+           align-items: center;
+           box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .c-head {
+            font-weight: bold;
+            color: black;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .confirm-message {
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .customAlert button, 
+        .customConfirm button {
+            border-radius: 5px;
+            border: none;
+            background: #00c4ea;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .customAlert button:hover, 
+        .customConfirm button:hover {
+            background: #00a8cc;
+        }
+        
+        #confirm-buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+        
+        #confirm-buttons 
+        button:first-child {
+            background: #f0f0f0;
+            color: #555;
+        }
+        
+        #confirm-buttons
+        button:first-child:hover {
+            background: #e0e0e0;
+        }
+
+
+
+/* ################# */
+/* ## 3. OFFLINE  ## */
+/* ################# */
+
+
+        .offline-state {            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #555555;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        
+       .offline-state .bi-wifi-off {
+           font-size: 5rem;
+           animation: blink 2s ease-in-out infinite;
+       }
+       
+
+       
+        @keyframes blink {
+          50% {
+            opacity: 0;
+          }
+        }
+        
+      .offline-state  a {
+      text-decoration: none;
+      color: #ff5e00;
+       }
+       
+    .timedAlert, .timedToast {        
+        color: white;
+        border-radius: 10px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        font-weight: 400;
+        display: none;
+        opacity: 0; 
+        transition: opacity 0.5s ease-in-out;
+        z-index: 20000000000;
+        max-width: 80%;
+        min-width: 70%;
+        background-color: #0d0d0d;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    .timedToast.active,
+    .timedAlert.active {
+        opacity: 1;
+    }
+     
+  
+     .timedToast {
+        top: 80%;        
+        padding: 20px 10px;
+        font-size: 1.2rem;
+     }
+     
+#autoLoad {
+  min-height: 40px;
+  position: relative; 
+  width: 100%; 
+  margin-top: auto;
+}
+
+#autoLoad .load {
+    position: absolute;
+    top: 50%;
+    left: 50%;    
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#autoLoad .preloader.active,
+#autoLoad .noMoreContent.active,
+#autoLoad .retryLoadingItems.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#autoLoad .preloader {
+    height: 100%;
+}
+
+#autoLoad .noMoreContent {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: var(--text-light);
+}
+.retryLoadingItems {
+    border: 2px solid black; 
+    border-radius: 3px;
+    padding: 5px 10px;
+    background: white;
+    font-weight: 700;
+    color: black;
+    display: flex;
+    gap:3px;
+    align-items: center;
+}

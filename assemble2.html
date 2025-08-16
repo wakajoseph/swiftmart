@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Small Gradient Loading Spinner</title>
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: black;
+}
+
+.preloader {
+  position: relative;
+  width: 40px; 
+  height: 40px;
+}
+
+.preloader div {
+  transform-origin: 20px 20px;
+  animation: fade 1.2s linear infinite;
+}
+
+.preloader div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 2px;     
+  left: 18px;    
+  width: 3px;  
+  height: 9px;  
+  border-radius: 1.5px;
+}
+
+/* Rotations + colors */
+.preloader div:nth-child(1)  { transform: rotate(0deg);   animation-delay: -1.1s; }
+.preloader div:nth-child(1):after  { background: #fff; }
+.preloader div:nth-child(2)  { transform: rotate(30deg);  animation-delay: -1.0s; }
+.preloader div:nth-child(2):after  { background: #e6e6e6; }
+.preloader div:nth-child(3)  { transform: rotate(60deg);  animation-delay: -0.9s; }
+.preloader div:nth-child(3):after  { background: #cccccc; }
+.preloader div:nth-child(4)  { transform: rotate(90deg);  animation-delay: -0.8s; }
+.preloader div:nth-child(4):after  { background: #b3b3b3; }
+.preloader div:nth-child(5)  { transform: rotate(120deg); animation-delay: -0.7s; }
+.preloader div:nth-child(5):after  { background: #999999; }
+.preloader div:nth-child(6)  { transform: rotate(150deg); animation-delay: -0.6s; }
+.preloader div:nth-child(6):after  { background: #808080; }
+.preloader div:nth-child(7)  { transform: rotate(180deg); animation-delay: -0.5s; }
+.preloader div:nth-child(7):after  { background: #666666; }
+.preloader div:nth-child(8)  { transform: rotate(210deg); animation-delay: -0.4s; }
+.preloader div:nth-child(8):after  { background: #4d4d4d; }
+.preloader div:nth-child(9)  { transform: rotate(240deg); animation-delay: -0.3s; }
+.preloader div:nth-child(9):after  { background: #333333; }
+.preloader div:nth-child(10) { transform: rotate(270deg); animation-delay: -0.2s; }
+.preloader div:nth-child(10):after { background: #1a1a1a; }
+.preloader div:nth-child(11) { transform: rotate(300deg); animation-delay: -0.1s; }
+.preloader div:nth-child(11):after { background: #0d0d0d; }
+.preloader div:nth-child(12) { transform: rotate(330deg); animation-delay: 0s; }
+.preloader div:nth-child(12):after { background: #000000; }
+
+@keyframes fade {
+  0% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+</style>
+</head>
+<body>
+
+<div class="preloader">
+  <div></div><div></div><div></div><div></div><div></div><div></div>
+  <div></div><div></div><div></div><div></div><div></div><div></div>
+</div>
+
+</body>
+</html>

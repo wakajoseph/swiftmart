@@ -1,0 +1,849 @@
+:root {
+    --primary: #2c6485;
+    --primary-dark: #1d4ed8;
+    --primary-light: rgba(44, 100, 133, 0.1);
+    --success: #16a34a;
+    --success-light: rgba(22, 163, 74, 0.1);
+    --warning: #ea580c;
+    --warning-light: rgba(234, 88, 12, 0.1);
+    --danger: #dc2626;
+    --light: #f8fafc;
+    --dark: #1e293b;
+    --gray: #64748b;
+    --light-gray: #e2e8f0;
+    --border: #cbd5e1;
+    --white: #ffffff;
+    --orange: #ff5e00;
+    --orange-light: #ff7300;
+    --blue-dark: #004b93;
+      --swiftmart-blue: #0056b3;
+      --swiftmart-dark: #1a1a2e;
+      --swiftmart-accent: #00b4d8;
+      --swiftmart-success: #28a745;
+      --swiftmart-danger: #dc3545;
+      --swiftmart-light: #f8f9fa;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #f1f1f1;
+    color: var(--dark);
+    line-height: 1.5;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Authentication Forms */
+.auth-forms {
+    display: block;
+    height: 100%;
+    position: relative;
+    padding: 20px;
+    background-color: var(--white);
+}
+
+.auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    height: calc(100% - 60px);
+}
+
+.auth-form.active {
+    display: flex;
+}
+
+
+.authentication-form {
+    
+}
+
+.form-description {
+    color: var(--gray);
+    text-align: center;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+.input-field {
+    margin: 5px auto;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.country-code {
+    position: relative;
+    padding: 5px;
+}
+
+.country-code select {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-weight: 500;
+    appearance: none;
+    padding-right: 20px;
+}
+
+.select-touch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+#phoneNumber {
+    flex: 1;
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-left: 1px solid var(--border);
+    font-size: 1rem;
+}
+
+.btn-continue {
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    width: 60%;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 30px auto;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-continue:hover {
+    background-color: var(--orange-light);
+}
+
+/* Password Form */
+#epayLog {
+    
+    height: 100%;
+    justify-content: center;    
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    height: calc(100% - 60px);
+}
+
+.form-logo {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: var(--orange-light);
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.password-inputs {
+    display: flex;
+    margin: 20px auto;
+    align-items: center;    
+    justify-content: center;
+    gap: 10px;
+}
+
+.password-dot {
+    width: 16px;
+    height: 16px;
+    border: 1px solid gray;
+    border-radius: 50%;    
+}
+
+.password-dot.filled {
+    background: black;
+}
+
+#pinFeedback, .new-number-error {
+    width: 100%;
+    text-align: center;
+    color: #173b5e;
+    font-weight: 600;
+}
+
+
+
+        .dial-pad {
+            display: flex;
+            flex-wrap: wrap;
+            width: 80%;
+            max-width: 400px;
+            margin: 10px auto;    
+            justify-content: space-around;
+            gap: 25px;            
+            
+        }
+        
+        .dial-btn, .submit-btn, .back-btn {
+            width: calc(100%/3 - 15px);
+            border: none;
+            font-size: 2.2rem;
+            background: transparent;
+            color: var(--gray);
+            font-weight: 300;
+            
+        }
+
+.dial-btn:focus {
+    color: #538f89;    
+    border: none;
+}
+
+.back-btn, .submit-btn {
+    font-weight: bold;
+}
+
+
+/* Footer */
+.app-footer {
+    margin: 20px auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    color: var(--gray);
+    font-size: 0.8rem;
+}
+
+.footer-partners {
+    display: flex;
+    margin-top: 5px;
+}
+
+.footer-divider {
+    border-left: 1px solid var(--gray);
+    border-right: 1px solid var(--gray);
+    padding: 0 10px;
+    margin: 0 10px;
+}
+
+/* Wallet Container */
+.epay-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    background-color: #f1f5f9;
+    min-height: 100vh;
+    display:none;
+    flex-direction: column;
+}
+
+/* Wallet Header */
+.wallet-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-top: 10px;
+}
+
+.wallet-header h1 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+/* Balance Card */
+.balance-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.balance-label {
+    color: var(--gray);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.balance-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 15px;
+}
+
+.user-section {
+    color: var(--primary);
+    margin-top: 15px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-name {
+    font-weight: 800;
+    width: 60%;
+    text-align: left;
+}
+
+.epay-number {
+    border-left: 2px solid var(--primary);
+    text-align: right;
+    flex: 1;
+    padding-left: 10px;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn-primary.btn,
+.btn-outline.btn {
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-light);
+}
+
+/* Wallet Sections */
+.wallet-section {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+}
+
+.section-header h2 {
+    font-size: 1.125rem;
+    color: var(--dark);
+}
+
+.view-all {
+    color: var(--primary);
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Transactions List */
+.transaction-list {
+    list-style: none;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.transaction-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.transaction-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.transaction-icon.deposit {
+    background-color: var(--success-light);
+    color: var(--success);
+}
+
+.transaction-icon.refund {
+    background-color: var(--warning-light);
+    color: var(--warning);
+}
+
+.transaction-icon.payment {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+.transaction-details h4 {
+    font-size: 0.9375rem;
+    margin-bottom: 3px;
+}
+
+.transaction-details p {
+    font-size: 0.8125rem;
+    color: var(--gray);
+}
+
+.transaction-amount {
+    font-weight: 600;
+    text-align: right;
+}
+
+.transaction-amount.deposit {
+    color: var(--success);
+}
+
+.transaction-amount.refund {
+    color: var(--warning);
+}
+
+.transaction-amount.payment {
+    color: var(--danger);
+}
+
+/* Coupons Section */
+.coupon-card {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px dashed var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.coupon-details h4 {
+    color: var(--primary);
+    margin-bottom: 5px;
+    font-size: 0.9375rem;
+}
+
+.coupon-details p {
+    font-size: 0.8125rem;
+    color: var(--gray);
+}
+
+.coupon-code {
+    background: var(--white);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    font-size: 0.875rem;
+}
+
+/* Settings Section */
+.settings-list {
+    list-style: none;
+}
+
+.settings-item {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-item:last-child {
+    border-bottom: none;
+}
+
+.settings-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.settings-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.settings-name {
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+.settings-action {
+    color: var(--primary);
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Empty States */
+.no-items, .no-coupons {
+    color: var(--gray);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.875rem;
+}
+
+.error-message {
+    color: var(--danger);
+    text-align: center;
+    margin: 10px 0;
+    font-size: 0.875rem;
+}
+
+
+.fl-cn {
+      display: flex;
+      align-items: center;
+    }
+
+    .fl-cn-cl {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #deposit-withdraw-refund-forms {
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+      min-height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top:0;
+      left: 0;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      
+    }
+    #deposit-withdraw-refund-forms.active{
+        display: block;
+        opacity: 1;
+        z-index: 10000;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--swiftmart-blue), var(--swiftmart-accent));
+      color: white;
+      padding: 1.2rem;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .header h2 {
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .forms {
+      width: 100%;
+      margin-top: 20px;
+      padding: 0 1rem;
+    }
+
+    form {
+      align-items: center;
+    }
+
+    .form-group {
+      background: white;
+      border-radius: 10px;
+      width: 100%;
+      padding: 15px;
+      box-shadow: 0 0 5px rgba(0,0,0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      color: #00243dee;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 12px 15px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s;
+      width: 100%;
+    }
+
+    .form-control:focus {
+      border-color: var(--swiftmart-accent);
+      box-shadow: 0 0 0 0.25rem rgba(0, 180, 216, 0.25);
+    }
+
+    .btn-swiftmart {
+      background: linear-gradient(135deg, var(--swiftmart-blue), var(--swiftmart-accent));
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      min-width: 200px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s;      
+      text-align: center;
+    }
+
+    .btn-swiftmart:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
+    }
+
+    .error-message {
+      color: var(--swiftmart-danger);
+      font-size: 0.8rem;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .agreement {
+      width: 100%;
+    }
+
+    .success-check {
+      color: var(--swiftmart-success);
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    
+    
+    
+    
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: auto;
+    }
+
+    .responseContainer {
+      width: 100%;
+      height: 100%;
+      background: #0000004f;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000009;      
+    }
+    #successResponse,
+    #failedResponse {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      width: 90%;
+      max-width: 600px;    
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 5px rgba(0,0,0, 0.1);
+      text-align: center;
+      color: #2c2c2c;
+      animation: opacity 0.3s ease-in-out;      
+    }
+
+    #successResponse.active,
+    #failedResponse.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .input-error {
+      border-color: var(--swiftmart-danger) !important;
+    }
+
+    #spinner {
+      display: none;
+    }
+
+    #spinner.active {
+      display: inline-block;
+    }
+
+    .btn-text {
+      display: inline-block;
+    }
+
+    .btn-text.hidden {
+      display: none;
+    }
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+
+    
+    .auth-form {
+        padding: 15px;
+    }
+    
+    .dial-pad {
+        gap: 10px;
+    }
+    
+    .wallet-section {
+        padding: 15px;
+    }
+    
+    .balance-card {
+        padding: 15px;
+    }
+}
+
+@media (min-width: 601px) {
+    .epay-container {
+        padding: 20px;
+    }
+    
+    .auth-forms {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .auth-form {
+        width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    #epayLog {
+        height: auto;
+        border-radius: 12px;
+    }
+}
+
+
+
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.epay-container, .auth-form {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Accessibility Improvements */
+input:focus, select:focus, a:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .auth-forms, .btn, .settings-action, .view-all {
+        display: none !important;
+    }
+    
+    .epay-container {
+        max-width: 100%;
+        padding: 0;
+        background: none;
+    }
+    
+    .wallet-section {
+        box-shadow: none;
+        border: 1px solid var(--border);
+        page-break-inside: avoid;
+    }
+}
+
+
+

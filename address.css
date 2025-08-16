@@ -1,0 +1,228 @@
+
+.user-address-container.view {    
+    height: 100%;   
+    overflow-y: auto;    
+  }
+  
+
+  
+
+    
+  
+  .user-address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 15px;
+  }
+    
+  .user-address-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 16px;
+  }
+    
+  .user-address-card {
+    width: 96%;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: var(--transition);
+  }
+    
+  .user-address-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+    
+  .user-address-default-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border: 2px solid var(--primary-light);
+    background-color: var(--primary-light);
+  }
+    
+  .user-address-default-content {
+    flex: 1;
+  }
+    
+  .user-address-default-title {
+    font-weight: 600;
+    color: var(--dark-color);
+    margin-bottom: 4px;
+  }
+    
+  .user-address-default-text {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+  }
+    
+  .user-address-btn {
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+    
+  .user-address-btn-primary {
+    background: var(--primary-color);
+    color: white;
+  }
+    
+  .user-address-btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+  }
+    
+  .user-address-btn-outline {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+  }
+    
+  .user-address-btn-outline:hover {
+    background: var(--primary-light);
+  }
+    
+  .user-address-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--secondary-color);
+  }
+    
+  .user-address-empty-icon {
+    font-size: 3rem;
+    color: var(--border-color);
+    margin-bottom: 16px;
+  }
+    
+  .user-address-empty-text {
+    margin-bottom: 20px;
+  }
+    
+  .user-address-form-group {
+    margin-bottom: 16px;
+  }
+    
+  .user-address-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dark-color);
+    font-size: 0.9rem;
+  }
+    
+  .user-address-form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    background-color: white;
+  }
+    
+  .user-address-form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(18, 150, 210, 0.2);
+  }
+    
+  .user-address-form-control.is-invalid {
+    border-color: var(--danger-color);
+  }
+    
+  .user-address-invalid-feedback {
+    color: var(--danger-color);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    display: none;
+  }
+    
+  .user-address-form-control.is-invalid + .user-address-invalid-feedback {
+    display: block;
+  }
+    
+  .user-address-list {
+    list-style: none;
+  }
+    
+  .user-address-item {
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 12px;
+    position: relative;
+  }
+    
+  .user-address-item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+    
+  .user-address-item-title {
+    font-weight: 600;
+  }
+    
+  .user-address-item-default {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+  }
+    
+  .user-address-item-actions {
+    display: flex;
+    gap: 8px;
+  }
+    
+  .user-address-action-btn {
+    background: none;
+    border: none;
+    color: var(--secondary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    padding: 4px;
+  }
+    
+  .user-address-action-btn:hover {
+    color: var(--primary-color);
+  }
+    
+  .user-address-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: var(--primary-color);
+    color: white;
+  }
+    
+  .user-address-badge-default {
+    background-color: var(--success-color);
+  }
+    
+  @media (max-width: 576px) {
+    .user-address-container {
+      padding: 16px 12px;
+    }
+    .user-address-section-title {
+      font-size: 1.3rem;
+    }
+    .user-address-btn {
+      padding: 8px 16px;
+    }
+  }
