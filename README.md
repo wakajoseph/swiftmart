@@ -1,8 +1,6 @@
 # SwiftMart 🛍️
 
-A modern e-commerce website built with [your tech stack, e.g., React, Django, Node.js].
-
-![SwiftMart Screenshot](screenshots/homepage.png) *(Add real screenshot path)*
+A modern e-commerce website built with vanilla frontend and depends on secure fast api server.
 
 ## Key Features
 - **Product Catalog** - Browse items by category/search
