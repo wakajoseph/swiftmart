@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff7300">
+    <title>swiftMart</title>
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="index.css">   
+    <link rel="stylesheet" href="userFeeds.css">   
+    <link rel="stylesheet" href="messaging.css">
+    <link rel="stylesheet" href="authForm.css">
+    <link rel="stylesheet" href="address.css">      
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
+</head>
+<body>
+    
+    <div class="timedAlert"></div>
+    <div class="timedToast"></div>
+    
+    <div class="loading">
+        <div style="display:flex; flex-direction: column; align-items: center">
+        <div class="preloader">
+          <div></div><div></div><div></div><div></div><div></div><div></div>
+          <div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
+        
+        <div id="loadFeedback">please wait...</div>
+        </div>
+    </div> 
+    
+    <div id="dialogContainer" style="display: none;">   
+        <div class="customConfirm" id="alertDialog">
+            <div class="c-head">Alert</div>
+            <div id="alertMessage" class="confirm-message"></div>
+            <button id="alertOkBtn">OK</button>
+        </div>
+             
+        <div class="customAlert" id="confirmDialog">
+            <div class="c-head">Confirm</div>
+            <div id="confirmMessage" class="confirm-message"></div>
+            <div id="confirm-buttons">
+                <button id="cancelBtn">Cancel</button>
+                <button id="confirmBtn">Proceed</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ="="="=" -->
+<div class="container view submain" id="home" data-display="flex">
+  <div class="header homeRoot cate">
+    <div class="searchBox" onclick="navigateSearch()">
+      <span>Men Shoes</span>
+      <i class="bi bi-search"></i>
+    </div>
+
+    <div class="navigate">
+      <button data-id="phone">Phones</button>
+      <button data-id="laptops">Laptops</button>
+      <button data-id="tablets">Tablets</button>
+      <button data-id="fridges">Fridge</button>
+      <button data-id="clothes">Clothes</button>
+      <button data-id="jewelries">Jewelry</button>
+      <button data-id="appliances">Appliances</button>
+      <button data-id="laundry">Laundry</button>
+      <button data-id="automotive">Automotive</button>
+      <button data-id="shoe">Shoes</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="homeScreen">
+      <div class="promoPage">          
+        <div class="displayImageContainer">
+          <div class="displayImage"></div>
+        </div>
+        
+        <!-- banner -->
+        <div class="banner">
+          <div class="bannerText">Grab This Exclusive Deals Faster</div>
+          <div class="bannerItems">
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">Tv&audio up to 30% off</div>
+            </div>
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">h1</div>
+            </div>
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">h1</div>
+            </div>
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">h1</div>
+            </div>
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">h1</div>
+            </div>
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">h1</div>
+            </div>
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">h1</div>
+            </div>
+            <div class="items">
+              <div class="image"></div>
+              <div class="text">h1</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- flash Sale -->
+        <div class="flashSale">
+          <div class="counter">
+            <span class="f__l">F<i class="fas fa-bolt"></i>sh Sale</span>
+            <div class="timer"></div>
+          </div>
+          <div class="flashSaleItems">
+            <div class="item">
+              <div class="image">
+                <img src="flashSale.jpg" alt="">
+              </div>
+              <div class="text">h🔥t deals</div>
+            </div>
+            <div class="item">
+              <div class="image">
+                <img src="test.jpg" alt="">
+              </div>
+              <div class="text">Ksh 299</div>
+            </div>
+            <div class="item">
+              <div class="image">
+                <img src="test.jpg" alt="">
+              </div>
+              <div class="text">Ksh 50</div>
+            </div>
+            <div class="item">
+              <div class="image">
+                <img src="10default.jpg" alt="">
+              </div>
+              <div class="text">Ksh 9754</div>
+            </div>
+          </div>
+        </div>
+      </div>
+        
+      <!-- products -->
+      <div class="homeProducts productsContainer"></div>
+
+      <div id="autoLoad">
+        <div class="preloader load">
+          <div></div><div></div><div></div><div></div><div></div><div></div>
+          <div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
+        <button class="retryLoadingItems load">
+          Retry <i class="bi bi-arrow-repeat"></i>
+        </button>
+        <div class="noMoreContent load active">No more content</div>
+      </div>
+    </div>
+  </div>
+</div>    
+
+<!--🔮 FIXED FOOTER 🔮-->
+  <div class="Mainfooter active">
+    <div id="navHome" class="items nv active" data-targeting="home">
+      <i class="fas fa-home"></i>
+      <span class="text">Home</span>
+    </div>
+
+    <div id="navCategory" class="items nv" data-targeting="category">
+      <i class="bi bi-grid"></i>
+      <span class="text">Category</span>
+    </div>
+
+    <div id="navChat" class="items nv" data-targeting="messages">
+      <i class="bi bi-chat-dots"></i>
+      <span class="text">Chat</span>
+      <div class="chatCounter budge">99+</div>
+    </div>
+
+    <div id="navCart" class="items nv cart" data-targeting="cart">
+      <i class="bi bi-cart"></i>
+      <span class="text">Cart</span>
+      <div class="cartCounter budge"></div>
+    </div>
+
+    <div id="navMe" class="items nv" data-targeting="user">
+      <i class="bi bi-person"></i>
+      <span class="text">Me</span>
+      <div class="meCounter budge"></div>
+    </div>
+  </div>
+
+
+
+ 
+ <!--###############################-->
+ <!-- 🔮 INDEPENDENT CONTAINERS 🔮 -->
+ <!-- ############################# -->
+<!-- ME TAB -->
+<div class="accountContainer submain view" id="user">
+    
+    <div style="width:100%" class="isLogged">
+     <div class="accountHeader">
+      <div class="user--Image">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="user--name">ME</div>
+      <div class="icon--set">
+        <i class="bi bi-headset" title="Customer Support"></i>
+        <i class="bi bi-gear-fill navsetting" title="Settings"></i>
+      </div>
+     </div>
+
+     <div class="user--wallet">
+      <div class="wallet">
+        <div>0</div>
+        <div>Coupons</div>
+      </div>
+      <div class="wallet">
+        <div>****</div>
+        <div>wallet <i class="bi bi-eye-slash"></i></div>
+      </div>
+      <div class="wallet">
+        <div>0</div>
+        <div>Coins <i class="fas fa-angle-right"></i></div>
+      </div>     
+     </div>
+    </div> <!-- /header section -->
+            
+    <div class="login--agent isGuest">
+      <div style="width: 100%; text-align: right; padding: 0 10px">
+        <i class="fas fa-times-circle"></i>
+      </div>
+      <div class="login--action">
+          <div style="width: 80%; margin: 0 auto;">
+              Login or signup for free account to manage your account swiftly
+          </div>
+          <button class="redirectAuth" >
+              LOGIN
+          </button>
+      </div> 
+    </div>
+    
+    <div class="address--section isLogged">
+      <div class="address--header">
+        <div class="address--title">
+          <i class="bi bi-geo-alt-fill"></i>
+          Default Shipping Address
+        </div>
+        <i class="bi bi-pencil-square" style="cursor: pointer;"></i>
+      </div>
+      <div class="address--content">
+        <div class="recipient"></div>
+        <div class="address--text">No shipping address found. Set your first address. It will appear here</div>
+        <div class="address--phone"></div>
+      </div>
+    </div>
+
+    <div class="order--tabs isLogged">
+      <div class="stage">
+        <i class="bi bi-clock-history"></i>
+        <span>Pending<br>Orders</span>
+      </div>
+      <div class="stage">
+        <i class="bi bi-patch-check-fill"></i>
+        <span>Confirmed<br>Orders</span>
+      </div>
+      <div class="stage">
+        <i class="bi bi-truck"></i>
+        <span>Shipping<br>Orders</span>
+      </div>
+      <div class="stage">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>Completed<br>Orders</span>
+      </div>
+      <div class="stage">
+        <i class="bi bi-x-octagon-fill"></i>
+        <span>Cancelled<br>Orders</span>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab">
+        <i class="fas fa-envelope"></i>
+        <div>Messages</div>
+        <span id="new--messages">0</span>
+        <i class="fas fa-angle-right"></i>
+      </div>
+      <div class="tab">
+        <i class="fas fa-heart"></i>
+        <div>Wishlist</div>
+        <i class="fas fa-angle-right"></i>
+      </div>
+      <div class="tab" style="border: none;">
+        <i class="fas fa-store"></i>
+        <div>Following</div>
+        <i class="fas fa-angle-right"></i>
+      </div>
+    </div>
+</div>
+
+<!-- cart Tab -->
+    <div class="cartContainer view submain" id="cart" data-display="flex">
+      <div class="cartHeader">
+        <div class="navigationContainer">
+          <span><i class="fas fa-angle-left navigate-back"></i></span>
+          <span class="totalItems" style="font-size: 1.3em; font-weight:600"></span>
+        </div>
+        <div id="manageCartItems">Edit</div>
+      </div>
+
+      <!-- 👆🏼top -->
+      <div class="cartMain">
+        <div class="itemsContainer"></div>
+        <div class="shippingPolicy">
+          <div><i class="fas fa-shield-alt"></i> Safe & Secure payment</div>
+          <div><i class="fas fa-lock"></i> Secure privacy</div>
+          <div><i class="fas fa-truck"></i> <span>Delivery guaranteed </span></div>
+          <div><i class="fas fa-box-open"></i> friendly after sell services</div>
+        </div>
+        <div class="relatedItemsContainer"></div>
+      </div>
+
+      <!-- 👇🏼bottom -->
+      <div class="cartFooter">
+        <div class="first">
+            <div id="checkAllItems">
+                <div class="checkbox checkAll">
+                   <i class="fas fa-check"></i> 
+                </div>
+                All
+            </div>                  
+        </div>                              
+        
+        <div id="deleteCartItems" class="deleteCartItems">
+              Remove Selected
+          </div>
+          
+        <div class="second show" id="checkOutOverview">
+          <div class="totalPrice"></div>
+          <div class="checkOut">Check Out <span id="totalCheckOut"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔮🔮🔮  -->
+    <div class="chatContainer submain view" id="messages" data-display="flex">
+      <header>
+        <div class="page-navigation">
+          <div class="navigate-back">
+            <i class="fas fa-angle-left"></i>
+          </div>
+          <div class="page-name">Message Center</div>
+        </div>
+
+        <div class="header-bottom">
+          <div class="chat-label">
+            <div><span id="logo"><i class="fas fa-comment-dots" style="color: #00142ec0;"></i></span>Contact Us With Chat</div>
+            <i class="fas fa-angle-right" style="color: #999;"></i>
+          </div>
+
+          <div class="chat-label">
+            <div><span id="logo"><i class="fas fa-envelope" style="color: #2e1c00c0;"></i></span>System Messages</div>
+            <i class="fas fa-angle-right" style="color: #999;"></i>
+          </div>
+
+          <div class="chat-label">
+            <div><span id="logo"><i class="fas fa-box-open" style="color: green;"></i></span>Order Updates</div>
+            <i class="fas fa-angle-right" style="color: #999;"></i>
+          </div>
+
+          <div class="chat-label">
+            <div><span id="logo"><i class="fas fa-bullhorn" style="color: #061e4d;"></i></span>Promotion</div>
+            <i class="fas fa-angle-right" style="color: #999;"></i>
+          </div>
+
+          <div class="chat-label">
+            <div><span id="logo"><i class="fas fa-comment-alt" style="color: #4d4d4d;"></i></span>Comments</div>
+            <i class="fas fa-angle-right" style="color: #999;"></i>
+          </div>
+        </div>
+      </header>
+
+      <main style="width: 100%;">
+        <section class="top-label isGuest">
+          <div>Chat with sellers</div>
+          <div class="login-prompt"><span class="login-link">Login</span> to view your messages</div>
+        </section>
+
+        <section class="message-list"></section>
+      </main>
+    </div>
+    
+<!-- 🔮🔮🔮 --> 
+   
+<!-- 🔮🔮🔮 --> 
+ <div id="chatContainer" class="view" data-display="flex">
+      <div class="conversation-header">
+        <button class="back-button navigate-back">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <div class="sender-info">
+          <div class="sender-avatar">
+            <i class="fas fa-store"></i>
+          </div>
+          <div class="sender-details">
+            <div class="sender-name"></div>
+            <div class="sender-status">
+              <div class="online-dot"></div>
+              <span>store</span>
+            </div>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span onclick="deleteMessage()"> <i style="color: red; font-size: 1.2em; padding: 0 10px" class="fas fa-trash"></i></span>
+          <span class="selectedMsg">1</span>
+          <span>Selected</span>
+          <input  type="checkbox" onchange="checkAll()"/>
+          
+        </div>
+      </div>
+      <div class="conversation-head">
+        <div class="day-divider">
+          <span>Today</span>
+        </div>
+        
+        
+      </div>
+      
+      <div class="conversation-footer">
+        
+        <textarea placeholder="Type a message" rows="1" class="message-input"></textarea>
+        <div class="sendButtonBox">
+        <button class="send-button"><i class="bi bi-send-fill" ></i></button>
+        <button class="send-button-alt"><i class="bi bi-shop" ></i></button>
+        </div>
+    </div>
+    </div>
+    
+ 
+  <!-- 🔮🔮🔮 -->
+ <div class="storeContainer view" id="storeContainer" data-display="flex">
+  <header>
+    <div id="storeSearch">
+      <i class="fas fa-angle-left navigate-back"></i>
+      <div id="searchArea">
+        <i class="fas fa-search"></i>
+        <input type="search" id="store-search" placeholder="Search store products...">
+      </div>
+      <div>
+        <i class="bi bi-three-dots"></i>
+      </div>
+    </div>
+
+    <div id="storeMetadata">
+      <div id="image">
+        <img src="./10default.jpg">
+      </div>
+      <div>
+        <h3 id="storeName">PochiAfrica</h3>
+        <div id="store-data">
+          <span>Total</span>
+          <span id="total-products">0 Products</span> |
+          <span>2 Followers</span>
+        </div>
+
+        <div id="store-rating">
+          <span>score 4.89</span>
+          <span>Rating(3)</span>
+        </div>
+      </div>
+
+      <button id="followBtn">Follow</button>
+    </div>
+    
+      
+      <div id="tool">Store Selective</div>
+    
+  </header>
+
+  <main>
+  
+
+    <section id="storeProducts">
+      
+    </section>
+  </main>
+
+  <footer id="storeFooter">
+    <div class="text-center red">
+      <i class="bi bi-shop"></i>
+      <div>Home</div>
+    </div>
+
+    <div class="text-center">
+      <i class="bi bi-box-seam"></i>
+      <div>Products</div>
+    </div>
+
+    <div class="text-center">
+      <i class="bi bi-grid-3x3-gap"></i>
+      <div>Category</div>
+    </div>
+
+    <div class="text-center" onclick="navigateChats()">
+      <i class="bi bi-chat-dots"></i>
+      <div>Contact Seller</div>
+    </div>
+  </footer>
+</div>   
+          
+<!-- order 🔮🔮🔮 container--> 
+  <div class="order-container view" id="order" data-display="block">
+    <div class="page-navigation">
+        <div class="navigate-back">
+          <i class="fas fa-angle-left"></i>
+        </div>
+        <div class="page-name">Place Order</div>
+    </div>
+        
+    <!-- delivery -->
+ 
+    <div class="section" id="delivery-address">
+      <div class="address-panel">
+        <div class="address-head">
+           <span id="address-holder">JOSEPH ONYANGO</span>
+           <span id="edit-address"><i class="fas fa-pen-to-square"></i>Edit</span>           
+        </div>
+        <div class="address-summary">
+            
+          <div id="location-marker">
+            <i class="fas fa-map-marker-alt"></i>  
+          </div>
+          <div id="location-name">
+            <div id="location">
+             BUNDALANGI, Port Victoria Next to Port Victoria County Referral Hospital
+            </div>
+            <div id="holder-number">
+              254114771230
+           </div>        
+          </div>     
+        </div>         
+      </div>
+    </div>    
+    
+    <!-- Payment Options Section -->
+    <div class="section" id="payment-options">
+      <div class="section-title"><i class="fas fa-credit-card"></i> Payment Method</div>
+      
+      <div class="payment-section">
+        <span class="payment-section-title">My WALLET</span>
+        <div class="payment-option">
+          <div class="payment-method">
+            <div class="payment-icon">
+              <i class="fas fa-wallet"></i>
+            </div>
+                        
+            <div class="payment-details navigateWallet">
+              <span class="payment-name">E-pay Account</span>
+              <span class="payment-info">Pay instantly with your wallet balance</span>
+              <span id="navigateAccount">MANAGE<i class="fas fa-mouse-pointer"></i>
+              </span>                          
+            </div>
+      
+          </div>
+          
+          <div class="payment-balance">
+            <div>Balance:</div>
+            <div>
+               <span id="wallet-balance"></span><small style="font-weight:bold" class="decimal" style="size: 0.8rem"></small>
+            </div>
+            <button class="btn-topup">
+                <i class="fas fa-plus-circle"></i> Top Up Wallet
+              </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="payment-section mpesa-topup" id="mpesa-topup"  style="margin-top: 15px;">        
+        <div class="payment-section-title">
+          <div>Top-up via M-pesa</div> 
+          <div role="button" id="collapseTop-up">cancel</div> 
+        </div>
+        <div class="payment-option">
+          <div class="payment-method">
+            <div class="payment-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 48 48">
+                <path fill="#0dc300" d="M31.003,7.001l-0.001-5.5c0-0.828,0.672-1.5,1.5-1.5	c0.828,0,1.5,0.672,1.5,1.5v5.5H31.003z">
+    
+                </path>
+                <path fill="#0dc300" d="M14.964,47.999h18.073c0.533,0,0.965-0.432,0.965-0.965V4.964c0-0.533-0.432-0.965-0.965-0.965	H14.964c-0.533,0-0.965,0.432-0.965,0.965v42.07C13.999,47.567,14.431,47.999,14.964,47.999z">
+    
+                </path>
+                <path fill="#fff" fill-rule="evenodd" d="M17.739,29.001h12.524c0.962,0,1.741-0.78,1.741-1.741V10.743	c0-0.962-0.78-1.741-1.741-1.741H17.739c-0.962,0-1.741,0.78-1.741,1.741V27.26C15.997,28.222,16.777,29.001,17.739,29.001z" clip-rule="evenodd">                    
+                </path>
+                <path fill="#9b2310" fill-rule="evenodd" d="M12.001,22.001	c3.643-0.7,5.865-2.448,7-5c1.135,2.552,3.357,4.3,7,5H12.001z" clip-rule="evenodd">    
+                </path>
+                <path fill="#e60023" fill-rule="evenodd" d="M12.001,22.001	c4.273,0.867,6.476,1,11,1c5.076,0,11.712-1.939,14-6l-9-4C24.039,18.139,21.863,22.001,12.001,22.001z" clip-rule="evenodd">
+                    
+                </path>
+               </svg>
+            </div>
+            
+            <div class="payment-details">
+              <span class="payment-name">M-Pesa</span>
+              <span class="payment-info">Pay via M-Pesa STK Push</span>
+              <div class="number-field">
+                <div>254</div>                 
+                <input type="number" id="topupNumber" placeholder="xxxxxxxxx">                
+              </div>              
+              <span class=" number-error">Enter Correct Number</span>
+              
+              <div class="amount-field">
+                <div>KSh</div>
+                <input type="number" id="amount" placeholder="1000">                                   
+              </div>
+              
+              <span class="amount-error">Enter Amount Between KSh 10 - KSh 300,000</span>
+              <span id="payWithMpesa"><i class="fas fa-check-circle" style="margin-right: 3px;"></i>Proceed</span>
+            </div>
+          </div>
+          <div class="payment-balance"></div>
+        </div>                
+      </div>
+    </div>
+    
+    <div class="section order-items">
+       
+       
+       <div class="order-item">
+         <div class="product-store">
+             <span><i class="fas fa-store"></i></span>
+             <span class="storeName">POCHI AFRICA</span>
+         </div>
+         
+         <div class="product-data">             
+          <div class="fulfilment">
+           <div class="fulfiler"><i class="fas fa-truck" style="margin-right: 5px;"></i></i>Fullfiled by swiftMart</div>
+           <div class="shipping-infomation">departures Nairobi arrives in your location within 3 days</div>
+          </div>
+         <div class="product">
+           <div class="product-picture">
+               <img src="test.jpg" alt="">
+           </div>
+           <div class="product-infomation">
+             <div class="product-tittle-and-price">
+               <div class="product-title">Smart Kid wear trousers and shirts</div>
+               <div class="product-price">KSh 12,433</div>
+             </div>
+             <div class="product-properties-and-quantity">
+               <div class="product-properties">color: red</div>
+               <div class="product-quantity">1</div>
+             </div>
+           </div>         
+          </div>            
+         </div>                           
+       </div>    
+    </div>
+               
+     <!-- discount -->          
+    <div class="section" id="discounts-applied">
+      <div class="section-title"><i class="fas fa-tag"></i> Discounts & Savings</div>
+      <div class="summary-row">
+        <span>Swift Points Redeemed</span>
+        <div>
+           <div id="swift-points">2 points</div>
+           <div style="color: var(--secondary);" id="points-value">(-KSh 200)</div>
+        </div>
+                
+      </div>
+      <div class="summary-row">
+        <span>Coupons Discount</span>
+        <span id="couponDiscount" style="color: var(--secondary)">None Available</span>
+      </div>      
+    </div>
+    
+      <!-- Order Summary -->
+    <div class="section" id="order-summary">
+      <div class="section-title"><i class="fas fa-receipt"></i> Order Summary</div>
+      <div class="summary-row">
+        <span>Subtotal (<small id="total-items"></small> item):</span>
+        <span id="sub-total"></span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping Fee:</span>
+        <span id="shipping-fee"></span>
+      </div>
+      <div class="summary-row">
+        <span>Discount:</span>
+        <span style="color: var(--secondary);" id="totalDiscount"></span>
+      </div>
+      
+      <hr />
+      
+      <div class="summary-row" style="margin-top: 15px;">
+        <strong>Total Payable:</strong>
+        <strong style="color: var(--primary); font-size: 1.2rem;" id="totalAmount">KSh 46,728</strong>
+      </div>
+      
+      <div class="summary-row" style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light);">
+        <span>Wallet Balance:</span>
+        <span id="available-balance">KSh 12,450</span>
+      </div>
+      <div class="summary-row" style="font-size: 0.9rem;">
+        <span class="moreMoneyLabel">Remaining After Payment:</span>
+        <span style="color: black; font-weight: 600;" id="remainingAfterPurchase">KSh 34,278</span>
+      </div>
+    </div>
+     
+     <!-- pay button -->
+    <button class="btn-place-order" id="btn-place-order">
+      <i class="fas fa-lock" style="font-size: 0.9em;"></i> Pay with Wallet
+    </button>
+    
+    <!-- Container Footer -->
+
+    <p style="text-align: center; margin-top: 20px; color: var(--text-light); font-size: 0.85rem;">
+      <i class="fas fa-shield-alt" style="margin-right: 5px; color: var(--primary);"></i>
+      Your payment is secured with SwiftMart's 256-bit SSL encryption
+    </p>   
+     
+</div>
+
+
+
+<!-- category 🔮🔮🔮 container -->
+<div class="categoryContainer submain view" id="category" data-display="grid">
+    <!-- Header Section -->
+    <div class="category-header">
+        <div class="search-bar">
+            <input type="text" class="search-bar__input" placeholder="Search for categories..." readonly>
+            <button class="search-bar__button">
+                <i class="bi bi-search"></i>
+            </button>
+        </div>
+
+        <div class="pathDisplay"></div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div class="category-sidebar">
+        <a href="#" class="category-nav__item category-nav__item--active">
+            <div class="category-nav__icon"></div>
+            <span class="category-nav__name">Clothing</span>
+        </a>
+
+        <a href="#" class="category-nav__item">
+            <div class="category-nav__icon"></div>
+            <span class="category-nav__name">Electronics</span>
+        </a>
+
+        <a href="#" class="category-nav__item">
+            <div class="category-nav__icon"></div>
+            <span class="category-nav__name">Home & Garden</span>
+        </a>
+
+        <a href="#" class="category-nav__item">
+            <div class="category-nav__icon"></div>
+            <span class="category-nav__name">Beauty</span>
+        </a>
+
+        <a href="#" class="category-nav__item">
+            <div class="category-nav__icon"></div>
+            <span class="category-nav__name">Sports</span>
+        </a>
+
+        <a href="#" class="category-nav__item">
+            <div class="category-nav__icon"></div>
+            <span class="category-nav__name">Toys</span>
+        </a>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="category-content">
+        <div class="category-section test">
+            <div class="category-section__header">
+                <h2 class="category-section__title">Women's Clothing</h2>
+                <a href="#" class="category-section__view-all">
+                    View All
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+
+            <div class="subcategory-grid">
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Dresses</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Tops</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Jeans</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Activewear</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Lingerie</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Swimwear</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Jackets</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Skirts</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-section test">
+            <div class="category-section__header">
+                <h2 class="category-section__title">Men's Clothing</h2>
+                <a href="#" class="category-section__view-all">
+                    View All
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+
+            <div class="subcategory-grid">
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Shirts</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">T-Shirts</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Jeans</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Suits</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Activewear</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Underwear</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="category-section test">
+            <div class="category-section__header">
+                <h2 class="category-section__title">Kids' Clothing</h2>
+                <a href="#" class="category-section__view-all">
+                    View All
+                    <i class="fas fa-angle-right"></i>
+                </a>
+            </div>
+
+            <div class="subcategory-grid">
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Boys</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Girls</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">Baby</span>
+                </a>
+
+                <a href="#" class="subcategory-card">
+                    <div class="subcategory-card__image"></div>
+                    <span class="subcategory-card__name">School Uniforms</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>      
+     
+<!-- search 🔮🔮🔮 container --> 
+<div class="searchContainer view" id="search" data-display="flex">
+   <div class="searchArea">
+       <span onclick="navigateHome()"><i class="bi bi-chevron-left"></i></span>
+       <input type="search" placeholder="search..." id="search" oninput="startSearch(event)">       
+   </div>
+   <div class="resultsContainer">          
+   </div>                                             
+</div>
+
+<!-- product 🔮🔮🔮 Container --> 
+  <div class="selectedProduct view" id="products" data-display="flex">
+      <div class="top selectedHeader">
+          <button><i class="fas fa-angle-left navigate-back"></i></button>
+          <div onclick="navigateSearch()">search...</div>
+          <button><i class="fas fa-search"></i></button>
+          <button><i class="fas fa-heart"></i></button>
+          
+          
+      </div>
+      
+      <div class="selectetProduct-main">
+          
+          <div class="images-container"> 
+            <div class="images"> 
+              <div class="photoContainer">                 
+              </div>
+            </div>
+            <div class="dot-indicators">                
+            </div>
+          </div>
+          
+          <div class="productDetails">
+              <div id="price">
+                  <span id="new"></span>
+                  <span id="old"></span>
+                  <span id="drop"></span>
+              </div>
+              <div class="details"></div>
+              
+              <div class="rating">
+   <span id="star"></span>
+   <span id="rate"></span>| Reviews (<span id="review"></span>)
+              </div>
+              
+          </div>
+
+
+
+          
+          <!-- rating -->
+          <div class="specification">
+           
+          </div>
+          <!-- specification -->
+          <!-- related items -->
+         
+          
+      </div>
+      
+      
+      <div class="footer">
+          
+        <div class="pf" onclick="startChat()">
+        <i class="fas fa-comment-dots"></i>
+        <span>Chat</span>           
+        </div>
+        
+      <div class="pf" onclick="navigateStoreContainer()">
+      <i class="fas fa-store"></i>
+      <span>Store</span>
+      </div>
+      
+      <div class="pf cart" onclick="navigateCart()">            
+      <i class="fas fa-shopping-cart"></i>
+      <span>Cart</span>
+      <div class="cartCounter budge"></div>
+      </div>
+           <button id="addToCart">ADD TO CART</button>
+      </div>                       
+  </div>   
+
+<!--📖📖📖📖📖📖📖📖📖📖-->  
+<div class="addToCartOverlay">
+     <div class="addToCart">
+      <div class="SelectedItemHead">
+         <div class="left">
+             <div class="v-pic">
+                 <img src="test.jpg" alt="" id="v-pic">
+             </div>
+             <div id="v-info">
+                 <div class="v-price text-bold">KES 0.00</div>
+                 <div class="v-stock text-light">In Stock 3 </div>
+             </div>
+         </div>
+         <div class="right">
+             <div class="cancel-btn" id="closeCart">×</div>
+             <div class="control__quantity">
+                <button id="btnMns">-</button>
+                <div id="quantity__display">1</div>
+                <button id="btnAdd">+</button>
+             </div>
+         </div>
+      </div>
+
+      <div class="shipping">
+        <div class="shipping-top">
+            <div class="text-bold">Shipping To</div>
+            <div id="select-address">
+               <span class="text-bold">Select</span>
+               <i class="fas fa-angle-right text-light"></i>
+            </div>       
+        </div>
+        <div class="shipping-bottom">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="shippingAddress">Budalangi, Port Victoria Near Port Victoria Referral Hospital</div>
+        </div>   
+      </div>
+      
+      <div class="fulfilment">
+        <div class="fulfilment-top">
+           <div class="sellerIcon">
+               <i class="fas fa-store"></i>
+           </div>
+           <div>Fulfilled By <span class="sellerType">Local Seller</span></div>
+        </div>
+        <div class="fulfilment-bottom">
+           <span>ships from <span class="storeLocation text-bold">Nairobi</span>, arrives In <span class="customerLocation text-bold">Budalangi</span> within <span class="estimatedDelivery">1-3 work days</span>.</span> 
+        </div>      
+      </div>
+      
+      <div class="available-variants"></div>
+        
+      <div id="cartOrder-toggler" class="order-actions">    
+        <div class="pushToCart">
+          <span>ADD TO CART
+            <i class="fas fa-shopping-cart"></i>
+          </span>
+        </div> 
+        <div class="pushToOrder" >
+            <span>ORDER NOW
+              <i class="fas fa-bolt"></i>
+            </span>
+        </div>     
+      </div>                                        
+     </div>
+  </div>
+
+<!--📖📖📖📖📖📖📖📖📖📖-->  
+<div class="addressContainer view" id="addressContainer"></div>
+
+<!--📖📖📖📖📖📖📖📖📖📖-->  
+<div class="loginContainer view" id="loginContainer"></div>
+
+<!--📖📖📖📖📖📖📖📖📖📖-->  
+    <div class="auth view" id="authForms">
+        <!-- Tabs -->
+        <div class="auth__tabs">
+            <button class="auth__tab">
+                <span><i class="fas fa-angle-left navigate-back"></i>
+                </span>
+            </button>
+            <button class="auth__tab auth__tab--active" id="auth-login-tab">Login</button>
+            <button class="auth__tab" id="auth-signup-tab">Sign Up</button>
+        </div>
+        
+        <!-- Forms -->
+        <div class="auth__forms">
+            <!-- Login Form -->
+            <form id="auth-login-form" class="auth__form auth__form--active">
+                <div class="auth__form-group">
+                    <label for="auth-login-email">Email</label>
+                    <input type="email" id="auth-login-email" class="auth__input" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="auth__form-group">
+                    <label for="auth-login-password">Password</label>
+                    <div class="auth__password-wrapper">
+                        <input type="password" id="auth-login-password" class="auth__input" placeholder="••••••••" required>
+                        <i class="far fa-eye auth__toggle-password" data-target="auth-login-password"></i>
+                    </div>
+                    <a href="#" class="auth__link">Forgot password?</a>
+                </div>
+                <div class="rememberMe">
+                    <input type="checkbox" id="auth-remember-me">
+                    Remember Me
+                </div>
+                <button type="submit" class="auth__btn auth__btn--primary">Log In</button>
+                
+                <div class="auth__divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="auth__social-buttons">
+                    <button type="button" class="auth__social-btn auth__social-btn--google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="auth__social-btn auth__social-btn--apple">
+                        <i class="fab fa-apple"></i> Apple
+                    </button>
+                </div>
+                
+                <p class="auth__switch-text">
+                    Don't have an account? <a href="#" class="auth__link" id="auth-show-signup">Sign up</a>
+                </p>
+            </form>
+            
+            <!-- Signup Form -->
+            <form id="auth-signup-form" class="auth__form">
+                <div class="auth__form-group">
+                    <label for="auth-signup-name">Full Name</label>
+                    <input type="text" id="auth-signup-name" class="auth__input" placeholder="John Doe" required>
+                </div>
+                
+                <div class="auth__form-group">
+                    <label for="auth-signup-email">Email</label>
+                    <input type="email" id="auth-signup-email" class="auth__input" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="auth__form-group">
+                    <label for="auth-signup-phone">Phone </label>
+                    <input type="tel" id="auth-signup-phone" class="auth__input" placeholder="+254 123 456 789" required>
+                </div>
+                
+                <div class="auth__form-group">
+                    <label for="auth-signup-password">Password</label>
+                    <div class="auth__password-wrapper">
+                        <input type="password" id="auth-signup-password" class="auth__input" placeholder="••••••••" required>
+                        <i class="far fa-eye auth__toggle-password" data-target="auth-signup-password"></i>
+                    </div>
+                    <div class="auth__password-strength">
+                        <span class="auth__strength-bar"></span>
+                        <span class="auth__strength-bar"></span>
+                        <span class="auth__strength-bar"></span>
+                        <span class="auth__strength-text">Password strength</span>
+                    </div>
+                </div>
+                
+                <div class="auth__form-group auth__form-group--checkbox">
+                    <input type="checkbox" id="auth-terms" required>
+                    <label for="auth-terms">I agree to the <a href="#" class="auth__link">Terms</a> and <a href="#" class="auth__link">Privacy Policy</a></label>
+                </div>
+                
+                <button type="submit" class="auth__btn auth__btn--primary">Create Account</button>
+                
+                <div class="auth__divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="auth__social-buttons">
+                    <button type="button" class="auth__social-btn auth__social-btn--google">
+                        <i class="fab fa-google"></i> Google
+                    </button>
+                    <button type="button" class="auth__social-btn auth__social-btn--apple">
+                        <i class="fab fa-apple"></i> Apple
+                    </button>
+                </div>
+                
+                <p class="auth__switch-text">
+                    Already have an account? <a href="#" class="auth__link" id="auth-show-login">Log in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+    
+<!-- ADDRESS -->
+<!--📖📖📖📖📖📖📖📖📖📖-->  
+  <div class="user-address-container view" id="addresses">
+    <div class="user-address-header">
+      <h1 class="user-address-section-title">My Addresses</h1>
+      <button class="user-address-btn user-address-btn-outline" id="addAddressBtn">
+        <i class="fas fa-plus"></i> Add New
+      </button>
+    </div>
+    
+    <div class="user-address-card user-address-default-card" id="defaultAddressCard">
+      <div class="user-address-default-content">
+        <div class="user-address-default-title">Default Address</div>
+        <div class="user-address-default-text" id="defaultAddressText">You haven't set a default address yet</div>
+      </div>
+      <button class="user-address-btn user-address-btn-primary" id="setDefaultBtn" disabled>Set Default</button>
+    </div>
+    
+    <div class="user-address-card" id="addressListCard">
+      <h2 class="user-address-section-title">Saved Addresses</h2>
+     
+      <div class="user-address-empty-state" id="emptyState">
+        <div class="user-address-empty-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="user-address-empty-text">You haven't saved any addresses yet</div>
+        <button class="user-address-btn user-address-btn-primary" id="addFirstAddressBtn">
+          <i class="fas fa-plus"></i> Add Your First Address
+        </button>
+      </div>
+      <ul class="user-address-list" id="addressList" style="display: none;"></ul>
+    </div>
+    
+    <div class="user-address-card" id="addressFormCard" style="display: none;">
+      <h2 class="user-address-section-title" id="formTitle">Add New Address</h2>
+      <form id="addressForm">
+        <div class="user-address-form-group">
+          <label for="addressName" class="user-address-form-label">Address Name (e.g. Home, Work)</label>
+          <input type="text" class="user-address-form-control" id="addressName" placeholder="e.g. Home, Office">
+          <div class="user-address-invalid-feedback">Please provide an address name</div>
+        </div>
+        
+        <div class="user-address-form-group">
+          <label for="county" class="user-address-form-label">County</label>
+          <select class="user-address-form-control" id="county" required>
+            <option value="" disabled selected>Select County</option>
+            <option value="nairobi">Nairobi</option>
+            <option value="mombasa">Mombasa</option>
+            <option value="kisumu">Kisumu</option>
+            <option value="nakuru">Nakuru</option>
+            <option value="kiambu">Kiambu</option>
+          </select>
+          <div class="user-address-invalid-feedback">Please select a county</div>
+        </div>
+        
+        <div class="user-address-form-group">
+          <label for="subcounty" class="user-address-form-label">Subcounty</label>
+          <select class="user-address-form-control" id="subcounty" required>
+            <option value="">Select Subcounty</option>
+          </select>
+          <div class="user-address-invalid-feedback">Please select a subcounty</div>
+        </div>
+        
+        <div class="user-address-form-group">
+          <label for="street" class="user-address-form-label">Street Address</label>
+          <input type="text" class="user-address-form-control" id="street" placeholder="e.g. 123 Main Street" required>
+          <div class="user-address-invalid-feedback">Please provide a street address</div>
+        </div>
+        
+        <div class="user-address-form-group">
+          <label for="building" class="user-address-form-label">Building/Apartment (Optional)</label>
+          <input type="text" class="user-address-form-control" id="building" placeholder="e.g. Apt 4B, Green House">
+        </div>
+        
+        <div class="user-address-form-group">
+          <label for="phone" class="user-address-form-label">Primary Phone Number</label>
+          <input type="tel" class="user-address-form-control" id="phone" placeholder="e.g. 0712345678" required>
+          <div class="user-address-invalid-feedback">Please provide a valid phone number</div>
+        </div>
+        
+        <div class="user-address-form-group">
+          <label for="pickupStation" class="user-address-form-label">Preferred Pickup Station</label>
+          <select class="user-address-form-control" id="pickupStation" required>
+            <option value="" disabled selected>Select Pickup Station</option>
+          </select>
+          <div class="user-address-invalid-feedback">Please select a pickup station</div>
+        </div>
+        
+        <div class="user-address-form-group">
+          <label class="user-address-form-label">
+            <input type="checkbox" id="setAsDefault"> Set as default address
+          </label>
+        </div>
+        
+        <div class="user-address-form-group" style="display: flex; gap: 12px;">
+          <button type="submit" class="user-address-btn user-address-btn-primary" style="flex: 1;">
+            <i class="fas fa-save"></i> Save Address
+          </button>
+          <button type="button" class="user-address-btn user-address-btn-outline" id="user-address-btn" style="flex: 1;">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+<!--  🔮🔮🔮🔮 settings container🛠️--> 
+ 
+  <div class="settings-container view" id="settings">
+    <header class="settings-header">
+      <i class="fas fa-angle-left navigate-back"></i>
+      <span>Settings</span>
+    </header>
+
+    <main class="settings-main">
+      <section class="settings-first">
+        <div>
+          <span>Theme Dark/Light</span>
+          <i class="bi settings-toggler bi-toggle2-off"></i>
+        </div>
+        <div>
+          <span>Account Information</span>
+          <i class="fas fa-angle-right"></i>
+        </div>
+        <div>
+          <span>Security Settings</span>
+          <i class="fas fa-angle-right"></i>
+        </div>
+        <div>
+          <span>Delete Account <br>
+            <span class="settings-attention">this action cannot be undone!</span>
+          </span>
+          <i class="fas fa-angle-right"></i>
+        </div>
+      </section>
+
+      <section class="settings-second">
+        <div onclick="newSeller()">          
+          <span class="settings-circled"><i class="fas fa-store"></i></span> 
+          <span>Sell with us</span>
+        </div>
+        <div onclick="newUser()">
+          <span class="settings-circled"><i class="fas fa-user"></i></span>
+          <span>Create a free account</span>
+        </div>
+      </section>
+
+      <section class="settings-third">
+        <div style="border:none;">About Us</div>
+        <div>Our Policies</div>
+        <div>FAQ</div>
+        <div>Version</div>      
+      </section>
+
+      <section class="settings-login isGuest">Login <i class="fas fa-shopping-cart"></i></section>
+      
+      <section class="isLogged settings-logout"><i class="fas fa-shopping-cart"></i> Logout</section>
+    </main>
+  </div>
+
+<!-- 🔮🔮🔮🔮 -->
+<!-- 🔮🔮🔮🔮 -->
+<!-- 🔮🔮🔮🔮 -->
+    
+ <script src="dependency.js"></script> 
+ <script src="myClasses.js"></script> 
+ <script src="navigo.min.js"></script> 
+ <script src="navigation.js"></script> 
+ <script src="initializer.js"></script>
+ <script src="productDom.js" ></script>
+ <script src="categories.js"></script>
+ <script src="slider.js"></script> 
+ 
+ <script src="auth.js"></script>
+ <script src="ws.js"></script>
+ 
+ <script src="settings.js"></script>
+ <script src="search.js"></script>
+ <script src="cart.js"></script>
+ <script src="index.js"></script>
+ <script src="orders.js"></script>
+ <script src="message.js"></script>
+ <script src="updateFlashSale.js"></script>
+ <script src="storeContainer.js"></script>
+
+ 
+ <script src="address.js"></script>
+</body>
+</html>
